@@ -1,7 +1,7 @@
 /* Stylesheet for index */
 
 *{
-    color: white;
+    color: #f2f2f2;
 }
 
 /* Background Image */
@@ -25,4 +25,27 @@ div.header-img{
     width: 300px;
     margin: auto;
     display: block;
+}
+
+div.nav-bar{
+    overflow: hidden;
+    position: fixed;
+    background-color: #666;
+    width: 100%;
+    top: 90px;
+}
+
+.nav-link{
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+    padding: 14px 40px ;
+    float: right;
+    transition: background .5s ease;
+}
+
+.nav-link:hover{
+    background-color: #1DB954;
+    color: black;
+
 }
