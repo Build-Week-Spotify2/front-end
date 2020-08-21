@@ -1,0 +1,102 @@
+/* Stylesheet for index */
+
+*{
+    color: #f2f2f2;
+}
+
+/* Background Image */
+
+body{
+    background-image:url("../assets/background4.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+div.header-img{
+    width: 100%;
+    background-color: #666;
+    overflow: hidden;
+    position: fixed;
+}
+
+#header-img{
+    width: 300px;
+    margin: auto;
+    display: block;
+}
+
+div.nav-bar{
+    overflow: hidden;
+    position: fixed;
+    background-color: #666;
+    width: 100%;
+    top: 90px;
+}
+
+.nav-link{
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+    padding: 14px 40px ;
+    float: right;
+    transition: background .5s ease;
+}
+
+.nav-link:hover{
+    background-color: #1DB954;
+    color: black;
+}
+
+.title{
+    margin-top: 220px;
+    font-size: 80px;
+    color: #1DB954;
+    text-align: center;
+}
+
+.mission{
+    margin-top: 10px;
+    font-size: 55px;   
+    text-align: center;
+}
+
+#email{
+    display: block;
+    margin: auto;
+    width: 250px;
+    padding: 8px;
+    border-radius: 50px;
+    background-color: #666;
+    font-size: 15px;
+    margin-top: 80px;
+}
+
+#email::placeholder{
+    color: #f2f2f2;
+}
+
+#email:hover{
+    
+    background-color: #666;
+    width: 300px;
+}
+
+#signUp{
+    display: block;
+    background-color: #1DB954;
+    margin: auto;
+    padding: 8px;
+    border: none;
+    border-radius: 50px;
+    width: 80px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+}
+
+#signUp:hover{
+    background-color: #f2f2f2;
+    color: #666;
+}
