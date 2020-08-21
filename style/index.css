@@ -7,7 +7,7 @@
 /* Background Image */
 
 body{
-    background-image:url("../assets/background.jpg");
+    background-image:url("../assets/background1.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -47,5 +47,11 @@ div.nav-bar{
 .nav-link:hover{
     background-color: #1DB954;
     color: black;
+}
 
+.title{
+    margin-top: 175px;
+    font-size: 80px;
+    
+    text-align: center;
 }
