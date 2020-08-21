@@ -50,14 +50,14 @@ div.nav-bar{
 }
 
 .title{
-    margin-top: 175px;
+    margin-top: 220px;
     font-size: 80px;
-    
+    color: #1DB954;
     text-align: center;
 }
 
 .mission{
-    margin-top: 39px;
+    margin-top: 10px;
     font-size: 55px;   
     text-align: center;
 }
