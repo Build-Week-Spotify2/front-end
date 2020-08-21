@@ -1,7 +1,7 @@
 /* Stylesheet for index */
 
 *{
-    color: black;
+    color: white;
 }
 
 /* Background Image */
@@ -12,4 +12,17 @@ body{
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
+}
+
+div.header-img{
+    width: 100%;
+    background-color: #666;
+    overflow: hidden;
+    position: fixed;
+}
+
+#header-img{
+    width: 300px;
+    margin: auto;
+    display: block;
 }
