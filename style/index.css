@@ -86,6 +86,7 @@ div.nav-bar{
 #signUp{
     display: block;
     background-color: #1DB954;
+    text-decoration: none;
     margin: auto;
     padding: 8px;
     border: none;
