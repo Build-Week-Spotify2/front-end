@@ -6,13 +6,13 @@ import * as yup from "yup";
 const SignIn = () => {
   
 const [formState, setFormState] = useState({
-    email: "",
+    username: "",
     password:"",
     
 })
 
 const [errors, setErrors] = useState({
-    email: "", 
+    username: "", 
     password: ""
 })
 
@@ -22,37 +22,24 @@ const formSubmit = (e) => {
     console.log("form submitted")
 }
 
-const inputChange = (e) => {
-    console.log("input changed", e.target.value);
-    const newFormData = {
-        ...formState,
-        [e.target.name]:e.target.value
-    }
-    validateChange(e.target);
-    setFormState(newFormData)
-}
-
+useEffect(() => {
+    console.log('Validating form')
+    formSchema.isValid(formState)
+}, [formState])
 
 const formSchema = yup.object().shape({
-    email: yup
-    .string()
-    .email("Must be a vaild email")
-    .required("Must include an email"),
-    password:yup
-    .string()
-    .required("Password is a required field")
-    .password("Must be a vaild password")
+    username: yup.string().required("Must include a username"),
+    password: yup.string().required('Must Enter a password').min(5, 'Password must be at least 5 characters')
 
 });
 
  const validateChange = (e) => {
- console.log(e)
     yup  
-       .reach(formSchema, e.name)
-       .then((vaild) => {
+       .reach(formSchema, e.target.name).validate(e.target.value)
+       .then(vaild => {
       setErrors({
           ...errors,
-          [e.name]:""      
+          [e.target.name]: ''    
         });
     })
    .catch((err) => {
@@ -60,7 +47,7 @@ const formSchema = yup.object().shape({
 
        setErrors({
            ...errors,
-           [e.name]: err.errors[0]
+           [e.target.name]: err.errors[0]
        });
    });
 
@@ -68,45 +55,48 @@ const formSchema = yup.object().shape({
 
 
 
-
-
-
-
-
-
+const inputChange = (e) => {
+    e.persist();
+    // console.log("input changed", e.target.value);
+    const newFormData = {
+        ...formState,
+        [e.target.name]: e.target.value
+    }
+    validateChange(e);
+    setFormState(newFormData)
+}
 
     return(<>
-      <form onSubmit={formSubmit}>
+                <form onSubmit={formSubmit}>
 
+                    <label htmlFor="username">
+                        Username
+                        <input
+                        id="username"
+                        type="text"
+                        name="username"
+                        value={formState.email}
+                        onChange={inputChange}
+                        />
+                        {errors.username.length > 0 ? <p className='error'>{errors.username}</p> : null}
+                    </label>
 
-<label htmlFor="email">
-    Email
-    <input
-    id="email"
-    type="text"
-    name="email"
-    value={formState.email}
-    onChange={inputChange}
-    />
-    
-</label>
+                    <label htmlFor="password">
+                        Password
+                        <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        value={formState.password}
+                        minLength="6" required
+                        onChange={inputChange}
+                        />
+                        {errors.password.length > 0 ? <p className='error'>{errors.password}</p> : null}
+                    </label>
 
-<label htmlFor="password">
-    Password (15 characters minimum):
-    <input
-    id="password"
-    type="password"
-    name="password"
-    value={formState.password}
-    minLength="6" required
-    onChange={inputChange}
-    />
-   
-</label>
+                    <button  type="submit">Submit</button>
 
-
-<button  type="submit">Submit</button>
-    </form>
+                </form>
     </>)
 }
 
