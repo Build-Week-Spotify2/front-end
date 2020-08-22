@@ -91,8 +91,8 @@ div.nav-bar{
     padding: 8px;
     border: none;
     border-radius: 50px;
-    width: 80px;
-    margin-top: 20px;
+    width: 100px;
+    margin-top: 100px;
     text-align: center;
     font-size: 15px;
 }
@@ -107,10 +107,19 @@ div.nav-bar{
     width: 700px;
     margin: auto;
     margin-top: 100px;
-    border: 1px solid #1DB954;
+    border: 5px solid #1DB954;
     transition: text-shadow .5s ease;
 }
 
 .text:hover:{
     text-shadow: 0px 0px 10px;
 } 
+
+.text h2 {
+    margin-top: 20px;
+
+}
+
+.text p{
+    margin-top: 10px;
+}
