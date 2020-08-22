@@ -5,7 +5,7 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 
 
-const SignIn = () => {
+const SignIn = (props) => {
 
 //form visibility
 function showLogin() {
@@ -39,7 +39,8 @@ const loginUser = (e) => {
     .then((res) => {
         console.log('succesful login', res)
         localStorage.setItem('auth-token', res.data.token)
-        window.location.href='/dashboard';
+        // window.location.href='/dashboard';
+        props.history.push('/dashboard')
     })
     .catch((res) => {
         console.log('login failed', res)
@@ -54,9 +55,11 @@ const registerUser = (e) => {
     .then((res) => {
         console.log('succesful registration', res)
         localStorage.setItem('auth-token', res.data.token)
+        props.history.push('/dashboard')
     })
     .catch((res) => {
         console.log('registration failed', res)
+        
     })
 }
 

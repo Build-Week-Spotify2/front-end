@@ -2,30 +2,75 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SearchContainer = styled.div`
-    width: 450px;
+    max-width: 500px;
     margin: 0 auto;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #393C41;
 `
 
 const SearchBar = styled.input`
     width: 425px;
-    height: 25px;
-    margin: 10px 5px;
+    height: 15px;
+    margin: 0 auto;
     background-color: white;
-    border-radius: 15px;    
+    border-radius: 15px; 
+    color: black;
+    text-align: center; 
+`
+const SearchResults = styled.div`
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 10px;
 
+`
+
+const SearchImage = styled.div`
+    width: 100px;
+    height: 100px;
+`
+
+const SearchText = styled.div`
+    color: white;
+    line-height: .5em;
+`
+
+const AddSong = styled.div`
+    color: white;
+    text-align: center;
+    width: 30px;
+    padding: 5px 0px;
+    border-radius: 20px;
+    background-color: black;
+
+    &:hover {
+        background-color: #1DB954;
+        cursor: pointer;
+        font-weight: 900;
+    }
 `
 
 const Search = () => {
     return(<>
 
         <SearchContainer>
-            <SearchBar></SearchBar>
-
+            <SearchBar type='text' placeholder='Search For A Song'></SearchBar>
+            {/* This is placeholder data, will map thruogh search results when it's encorporated to the backend */}
+                <SearchResults>
+                    <SearchImage>
+                            <img src='https://i.scdn.co/image/ab67616d00001e02eaccf766c181fa3ff24048d4' alt='Album Artwork'/>
+                    </SearchImage>
+                    <SearchText>
+                        <p>Artist: The Ghost Inside</p>
+                        <p>Album: Get What You Give</p>
+                        <p>Song: Engine 45</p>
+                    </SearchText>
+                    <AddSong>
+                        +
+                    </AddSong>
+                </SearchResults>
         </SearchContainer>
         
     </>)
