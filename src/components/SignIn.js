@@ -1,9 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import * as yup from "yup";
-// import styled from 'styled-components'
+
+
 
 
 const SignIn = () => {
+
+//form visibility
+function showLogin() {
+    document.getElementById('login-form').style.display='flex';
+    document.getElementById('signup-form').style.display='none';
+}
+
+function showSignUp() {
+    document.getElementById('signup-form').style.display='flex';
+    document.getElementById('login-form').style.display='none';
+}
+
   
 const [formState, setFormState] = useState({
     username: "",
@@ -17,7 +30,12 @@ const [errors, setErrors] = useState({
 })
 
 
-const formSubmit = (e) => {
+const loginUser = (e) => {
+    e.preventDefualt();
+    console.log("form submitted")
+}
+
+const registerUser = (e) => {
     e.preventDefualt();
     console.log("form submitted")
 }
@@ -67,12 +85,11 @@ const inputChange = (e) => {
 }
 
     return(<>
-                <form onSubmit={formSubmit}>
+                <form id='login-form' onSubmit={loginUser}>
 
                     <label htmlFor="username">
                         Username
                         <input
-                        id="username"
                         type="text"
                         name="username"
                         value={formState.email}
@@ -84,7 +101,6 @@ const inputChange = (e) => {
                     <label htmlFor="password">
                         Password
                         <input
-                        id="password"
                         type="password"
                         name="password"
                         value={formState.password}
@@ -94,7 +110,38 @@ const inputChange = (e) => {
                         {errors.password.length > 0 ? <p className='error'>{errors.password}</p> : null}
                     </label>
 
-                    <button  type="submit">Submit</button>
+                    <button type="submit">Login</button>
+                    <div onClick={showSignUp} className='new-user-toggle'>New User? Register Here</div>
+
+                </form>
+
+                <form id='signup-form' onSubmit={registerUser}>
+
+                    <label htmlFor="username">
+                        Username
+                        <input
+                        type="text"
+                        name="username"
+                        value={formState.email}
+                        onChange={inputChange}
+                        />
+                        {errors.username.length > 0 ? <p className='error'>{errors.username}</p> : null}
+                    </label>
+
+                    <label htmlFor="password">
+                        Password
+                        <input
+                        type="password"
+                        name="password"
+                        value={formState.password}
+                        minLength="6" required
+                        onChange={inputChange}
+                        />
+                        {errors.password.length > 0 ? <p className='error'>{errors.password}</p> : null}
+                    </label>
+
+                    <button type="submit">Sign Up</button>
+                    <div onClick={showLogin} className='new-user-toggle'>Already Registered? Login Here</div>
 
                 </form>
     </>)

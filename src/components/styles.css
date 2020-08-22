@@ -37,12 +37,12 @@ form {
   
   select:focus {
     outline: none;
-    border-color: #1ee7e2;
+    border-color: #1DB954;
   }
   
   input:focus {
     outline: none;
-    border-color: #1ee7e2;
+    border-color: #1DB954;
   }
   
   input:placeholder {
@@ -84,6 +84,20 @@ form {
   .error {
     font-size: 1.2rem;
     color: red;
+  }
+
+  #login-form {
+    display: none;
+  }
+
+  .new-user-toggle {
+    text-align: center;
+    padding: 5px;
+  }
+
+  .new-user-toggle:hover {
+    font-weight: 900;
+    cursor: pointer;
   }
   
   .terms {
