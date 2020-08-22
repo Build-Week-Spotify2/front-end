@@ -101,3 +101,16 @@ div.nav-bar{
     background-color: #f2f2f2;
     color: #666;
 }
+
+.text{
+    background-color: #666;
+    width: 700px;
+    margin: auto;
+    margin-top: 100px;
+    border: 1px solid #1DB954;
+    transition: text-shadow .5s ease;
+}
+
+.text:hover:{
+    text-shadow: 0px 0px 10px;
+} 
