@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react';
 import * as yup from "yup";
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 
+import {connect} from 'react-redux'
+import {setUser} from '../actions/signInActions';
+
 
 
 
@@ -33,13 +36,12 @@ const [errors, setErrors] = useState({
 //posting functionality
 const loginUser = (e) => {
     e.preventDefault();
-
+    props.setUser(formState.username)
     axiosWithAuth()
     .post('/auth/login', formState)
     .then((res) => {
         console.log('succesful login', res)
         localStorage.setItem('auth-token', res.data.token)
-        // window.location.href='/dashboard';
         props.history.push('/dashboard')
     })
     .catch((res) => {
@@ -53,7 +55,7 @@ const registerUser = (e) => {
     axiosWithAuth()
     .post('/auth/register', formState)
     .then((res) => {
-        console.log('succesful registration', res)
+        // console.log('succesful registration', res)
         localStorage.setItem('auth-token', res.data.token)
         props.history.push('/dashboard')
     })
@@ -65,7 +67,7 @@ const registerUser = (e) => {
 
 //form validation
 useEffect(() => {
-    console.log('Validating form')
+    // console.log('Validating form')
     formSchema.isValid(formState)
 }, [formState])
 
@@ -170,4 +172,13 @@ const inputChange = (e) => {
     </>)
 }
 
-export default SignIn;
+const mapStateToProps = state => {
+    return {
+        userOnProps: state.signInReducer
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    {setUser}
+)(SignIn)
