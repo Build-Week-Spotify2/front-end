@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
+import {connect} from 'react-redux';
+
 const NavContainer = styled.div`
     margin: 0 auto;
     display: flex;
@@ -47,18 +49,31 @@ function signOut() {
     window.location.href='/'
 }
 
-const NavBar = () => {
+const NavBar = (props) => {
     return(
         <NavContainer>
             <NavItem><Link to='/dashboard'>Home</Link></NavItem>
             <NavItem><Link to='/saved-songs'>Saved Songs</Link></NavItem>
             <NavItem><Link to='/search-songs'>Search</Link></NavItem>
+            {props.userOnProps.isLoggedIn ? (
             <NavUser>
-                <div className='username'>Username</div>
+                <div className='username'>{props.userOnProps.username}</div>
                 <div onClick={signOut} className='sign-out'>Sign Out</div>
             </NavUser>
+            ) : (
+                <></>
+            )}
         </NavContainer>
     )
 }
 
-export default NavBar;
+const mapStateToProps = state => {
+    return {
+        userOnProps: state.signInReducer
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    {}
+)(NavBar)
