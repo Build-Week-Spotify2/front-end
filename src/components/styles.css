@@ -37,12 +37,12 @@ form {
   
   select:focus {
     outline: none;
-    border-color: #1ee7e2;
+    border-color: #1DB954;
   }
   
   input:focus {
     outline: none;
-    border-color: #1ee7e2;
+    border-color: #1DB954;
   }
   
   input:placeholder {
@@ -60,6 +60,7 @@ form {
     letter-spacing: 2px;
     outline: none;
     background-color:whitesmoke;
+    margin: 0 auto;
     
     color: black;
     cursor: pointer;
@@ -68,7 +69,7 @@ form {
   
   button:hover {
     background-image: none;
-    background-color: green;
+    background-color: #1DB954;
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
   }
   
@@ -83,6 +84,20 @@ form {
   .error {
     font-size: 1.2rem;
     color: red;
+  }
+
+  #login-form {
+    display: none;
+  }
+
+  .new-user-toggle {
+    text-align: center;
+    padding: 5px;
+  }
+
+  .new-user-toggle:hover {
+    font-weight: 900;
+    cursor: pointer;
   }
   
   .terms {

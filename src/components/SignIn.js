@@ -1,58 +1,84 @@
 import React, {useState, useEffect} from 'react';
 import * as yup from "yup";
-// import styled from 'styled-components'
+import {axiosWithAuth} from '../utils/axiosWithAuth';
+
+
 
 
 const SignIn = () => {
-  
+
+//form visibility
+function showLogin() {
+    document.getElementById('login-form').style.display='flex';
+    document.getElementById('signup-form').style.display='none';
+}
+
+function showSignUp() {
+    document.getElementById('signup-form').style.display='flex';
+    document.getElementById('login-form').style.display='none';
+}
+
+//form state 
 const [formState, setFormState] = useState({
-    email: "",
-    password:"",
-    
+    username: "",
+    password:"",   
 })
 
 const [errors, setErrors] = useState({
-    email: "", 
+    username: "", 
     password: ""
 })
 
 
-const formSubmit = (e) => {
-    e.preventDefualt();
-    console.log("form submitted")
+//posting functionality
+const loginUser = (e) => {
+    e.preventDefault();
+
+    axiosWithAuth()
+    .post('/auth/login', formState)
+    .then((res) => {
+        console.log('succesful login', res)
+        localStorage.setItem('auth-token', res.data.token)
+        window.location.href='/dashboard';
+    })
+    .catch((res) => {
+        console.log('login failed', res)
+    })
 }
 
-const inputChange = (e) => {
-    console.log("input changed", e.target.value);
-    const newFormData = {
-        ...formState,
-        [e.target.name]:e.target.value
-    }
-    validateChange(e.target);
-    setFormState(newFormData)
+const registerUser = (e) => {
+    e.preventDefault();
+    
+    axiosWithAuth()
+    .post('/auth/register', formState)
+    .then((res) => {
+        console.log('succesful registration', res)
+        localStorage.setItem('auth-token', res.data.token)
+    })
+    .catch((res) => {
+        console.log('registration failed', res)
+    })
 }
 
+//form validation
+useEffect(() => {
+    console.log('Validating form')
+    formSchema.isValid(formState)
+}, [formState])
 
 const formSchema = yup.object().shape({
-    email: yup
-    .string()
-    .email("Must be a vaild email")
-    .required("Must include an email"),
-    password:yup
-    .string()
-    .required("Password is a required field")
-    .password("Must be a vaild password")
+    username: yup.string().required("Must include a username"),
+    password: yup.string().required('Must Enter a password').min(5, 'Password must be at least 5 characters')
 
 });
 
  const validateChange = (e) => {
- console.log(e)
     yup  
-       .reach(formSchema, e.name)
-       .then((vaild) => {
+       .reach(formSchema, e.target.name).validate(e.target.value)
+       .then(vaild => {
       setErrors({
           ...errors,
-          [e.name]:""      
+          [e.target.name]: ''    
         });
     })
    .catch((err) => {
@@ -60,53 +86,84 @@ const formSchema = yup.object().shape({
 
        setErrors({
            ...errors,
-           [e.name]: err.errors[0]
+           [e.target.name]: err.errors[0]
        });
    });
 
 };
 
-
-
-
-
-
-
-
-
+//change handlers
+const inputChange = (e) => {
+    e.persist();
+    // console.log("input changed", e.target.value);
+    const newFormData = {
+        ...formState,
+        [e.target.name]: e.target.value
+    }
+    validateChange(e);
+    setFormState(newFormData)
+}
 
     return(<>
-      <form onSubmit={formSubmit}>
+                <form id='login-form' onSubmit={loginUser}>
 
+                    <label htmlFor="username">
+                        Username
+                        <input
+                        type="text"
+                        name="username"
+                        value={formState.email}
+                        onChange={inputChange}
+                        />
+                        {errors.username.length > 0 ? <p className='error'>{errors.username}</p> : null}
+                    </label>
 
-<label htmlFor="email">
-    Email
-    <input
-    id="email"
-    type="text"
-    name="email"
-    value={formState.email}
-    onChange={inputChange}
-    />
-    
-</label>
+                    <label htmlFor="password">
+                        Password
+                        <input
+                        type="password"
+                        name="password"
+                        value={formState.password}
+                        minLength="6" required
+                        onChange={inputChange}
+                        />
+                        {errors.password.length > 0 ? <p className='error'>{errors.password}</p> : null}
+                    </label>
 
-<label htmlFor="password">
-    Password (15 characters minimum):
-    <input
-    id="password"
-    type="password"
-    name="password"
-    value={formState.password}
-    minLength="6" required
-    onChange={inputChange}
-    />
-   
-</label>
+                    <button type="submit">Login</button>
+                    <div onClick={showSignUp} className='new-user-toggle'>New User? Register Here</div>
 
+                </form>
 
-<button  type="submit">Submit</button>
-    </form>
+                <form id='signup-form' onSubmit={registerUser}>
+
+                    <label htmlFor="username">
+                        Username
+                        <input
+                        type="text"
+                        name="username"
+                        value={formState.email}
+                        onChange={inputChange}
+                        />
+                        {errors.username.length > 0 ? <p className='error'>{errors.username}</p> : null}
+                    </label>
+
+                    <label htmlFor="password">
+                        Password
+                        <input
+                        type="password"
+                        name="password"
+                        value={formState.password}
+                        minLength="6" required
+                        onChange={inputChange}
+                        />
+                        {errors.password.length > 0 ? <p className='error'>{errors.password}</p> : null}
+                    </label>
+
+                    <button type="submit">Sign Up</button>
+                    <div onClick={showLogin} className='new-user-toggle'>Already Registered? Login Here</div>
+
+                </form>
     </>)
 }
 

@@ -42,13 +42,21 @@ const NavUser = styled.div`
 
 `
 
+function signOut() {
+    localStorage.removeItem('auth-token')
+    window.location.href='/'
+}
+
 const NavBar = () => {
     return(
         <NavContainer>
             <NavItem><Link to='/dashboard'>Home</Link></NavItem>
             <NavItem><Link to='/saved-songs'>Saved Songs</Link></NavItem>
             <NavItem><Link to='/search-songs'>Search</Link></NavItem>
-            <NavUser><div className='username'>Username</div><div className='sign-out'>Sign Out</div></NavUser>
+            <NavUser>
+                <div className='username'>Username</div>
+                <div onClick={signOut} className='sign-out'>Sign Out</div>
+            </NavUser>
         </NavContainer>
     )
 }
