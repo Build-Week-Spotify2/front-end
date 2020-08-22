@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import * as yup from "yup";
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 
 
@@ -17,11 +18,10 @@ function showSignUp() {
     document.getElementById('login-form').style.display='none';
 }
 
-  
+//form state 
 const [formState, setFormState] = useState({
     username: "",
-    password:"",
-    
+    password:"",   
 })
 
 const [errors, setErrors] = useState({
@@ -30,16 +30,37 @@ const [errors, setErrors] = useState({
 })
 
 
+//posting functionality
 const loginUser = (e) => {
-    e.preventDefualt();
-    console.log("form submitted")
+    e.preventDefault();
+
+    axiosWithAuth()
+    .post('/auth/login', formState)
+    .then((res) => {
+        console.log('succesful login', res)
+        localStorage.setItem('auth-token', res.data.token)
+        window.location.href='/dashboard';
+    })
+    .catch((res) => {
+        console.log('login failed', res)
+    })
 }
 
 const registerUser = (e) => {
-    e.preventDefualt();
-    console.log("form submitted")
+    e.preventDefault();
+    
+    axiosWithAuth()
+    .post('/auth/register', formState)
+    .then((res) => {
+        console.log('succesful registration', res)
+        localStorage.setItem('auth-token', res.data.token)
+    })
+    .catch((res) => {
+        console.log('registration failed', res)
+    })
 }
 
+//form validation
 useEffect(() => {
     console.log('Validating form')
     formSchema.isValid(formState)
@@ -71,8 +92,7 @@ const formSchema = yup.object().shape({
 
 };
 
-
-
+//change handlers
 const inputChange = (e) => {
     e.persist();
     // console.log("input changed", e.target.value);
