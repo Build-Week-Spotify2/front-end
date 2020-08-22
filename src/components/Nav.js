@@ -7,12 +7,12 @@ const NavContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 75px;
+    height: 80px;
     background-image: linear-gradient(black, #666666);
 `
 
 const NavItem = styled.div`
-    width: 95px;
+    width: 90px;
     font-weight: 700;
     height: 20px;
     text-align: center;
@@ -24,6 +24,7 @@ const NavItem = styled.div`
 
     &:hover {
         background-color: #1DB954;
+        cursor: pointer;
     }
 `
 
@@ -34,6 +35,11 @@ const NavUser = styled.div`
     right: 2%;
     text-align: center;
 
+    @media (max-width: 510px) {
+        top: 0;
+        right: calc(50% - 26px);
+    }
+
 `
 
 const NavBar = () => {
@@ -42,7 +48,7 @@ const NavBar = () => {
             <NavItem><Link to='/dashboard'>Home</Link></NavItem>
             <NavItem><Link to='/saved-songs'>Saved Songs</Link></NavItem>
             <NavItem><Link to='/search-songs'>Search</Link></NavItem>
-            <NavUser><div>Username</div><div>Sign Out</div></NavUser>
+            <NavUser><div className='username'>Username</div><div className='sign-out'>Sign Out</div></NavUser>
         </NavContainer>
     )
 }
