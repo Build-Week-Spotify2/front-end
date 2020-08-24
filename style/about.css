@@ -53,3 +53,27 @@ div.nav-bar{
     color: #1DB954;
     text-align: center;
 }
+
+#developers{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+#developers figure{
+    width: 22.5%;
+    text-align: center;
+}
+
+#developers figure img{
+    width: 99.999%;
+}
+
+#developers figure figcaption{
+    margin: 0.25rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+    background-color: #666;
+
+}
