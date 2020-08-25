@@ -5,7 +5,7 @@
 }
 
 body{
-    background-image:url("../assets/background4.jpg");
+    background-image:url("../assets/background6.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -50,24 +50,32 @@ div.nav-bar{
 .title{
     margin-top: 220px;
     font-size: 80px;
+    background-color: #666;
     color: #1DB954;
     text-align: center;
+    border: 10px solid #666;
+    border-radius: 50%;
 }
 
 #developers{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 2rem;
+    margin-top: 5rem;
 }
 
 #developers figure{
     width: 22.5%;
     text-align: center;
+
 }
 
 #developers figure img{
-    width: 99.999%;
+    margin-top: 20px;
+    width:  300px;
+    height: 300px;
+    object-fit: cover;
+    border: 3px solid #1DB954;
 }
 
 #developers figure figcaption{
@@ -75,5 +83,5 @@ div.nav-bar{
     font-weight: bold;
     font-size: 1.25rem;
     background-color: #666;
-
+    border: 3px solid #1DB954;
 }
