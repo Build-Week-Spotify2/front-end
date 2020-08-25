@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Search from './Search';
 
 const DashboardContainer = styled.div`
     max-width: 750px;
@@ -9,6 +10,7 @@ const DashboardContainer = styled.div`
     border-radius: 10px;
     background-color: #393C41;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 `
 
@@ -32,23 +34,30 @@ const SongText = styled.div`
     color: white;
     line-height: .5em;
 `
+const InfoContainer = styled.div`
+    display: flex;
+`
 
 const Dashboard = () => {
     return (<>
         <DashboardContainer>
-            <SongInfo>
-                <SongImage>
-                <img src='https://i.scdn.co/image/ab67616d00001e02eaccf766c181fa3ff24048d4' alt='Album Artwork'/>
-                </SongImage>
-                <SongText>
-                    <p>Artist: The Ghost Inside</p>
-                    <p>Album: Get What You Give</p>
-                    <p>Song: Engine 45</p>
-                </SongText>
-            </SongInfo>
-            <SongGraph>
-                <p>graph here</p>
-            </SongGraph>
+            <Search />
+            <InfoContainer>
+                <SongInfo>
+                    <SongImage>
+                    <img src='https://i.scdn.co/image/ab67616d00001e02eaccf766c181fa3ff24048d4' alt='Album Artwork'/>
+                    </SongImage>
+                    <SongText>
+                        <p>Artist: The Ghost Inside</p>
+                        <p>Album: Get What You Give</p>
+                        <p>Song: Engine 45</p>
+                    </SongText>
+                </SongInfo>
+                <SongGraph>
+                    <p>graph here</p>
+                </SongGraph>
+            </InfoContainer>
+      
         </DashboardContainer>
     </>)
 }

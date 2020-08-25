@@ -40,16 +40,23 @@ const SearchText = styled.div`
 const AddSong = styled.div`
     color: white;
     text-align: center;
-    width: 30px;
-    padding: 5px 0px;
+    width: 60px;
+    padding: 5px 3px;
     border-radius: 20px;
     background-color: black;
+    margin: 5px;
 
     &:hover {
         background-color: #1DB954;
         cursor: pointer;
         font-weight: 900;
     }
+`
+
+const Functionality = styled.div`
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 `
 
 const Search = () => {
@@ -67,9 +74,11 @@ const Search = () => {
                         <p>Album: Get What You Give</p>
                         <p>Song: Engine 45</p>
                     </SearchText>
-                    <AddSong>
-                        +
-                    </AddSong>
+                    <Functionality>
+                        <AddSong>Save</AddSong>
+                        <AddSong>Suggest</AddSong>
+                    </Functionality>
+                    
                 </SearchResults>
         </SearchContainer>
         
