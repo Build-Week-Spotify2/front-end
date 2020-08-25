@@ -36,6 +36,7 @@ const [errors, setErrors] = useState({
 //posting functionality
 const loginUser = (e) => {
     e.preventDefault();
+    e.persist();
     props.setUser(formState.username)
     axiosWithAuth()
     .post('/auth/login', formState)
