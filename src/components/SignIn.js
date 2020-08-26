@@ -34,12 +34,15 @@ const [errors, setErrors] = useState({
 const loginUser = (e) => {
     e.preventDefault();
     e.persist();
-    props.setUser(formState.username)
+    
     axiosWithAuth()
     .post('/auth/login', formState)
     .then((res) => {
-        console.log('succesful login', res)
         localStorage.setItem('auth-token', res.data.token)
+        e.persist();
+        props.setUser(formState.username)
+        // console.log('succesful login', res)
+        
         props.history.push('/dashboard')
     })
     .catch((res) => {
@@ -85,7 +88,7 @@ const formSchema = yup.object().shape({
         });
     })
    .catch((err) => {
-       console.log(err);
+    //    console.log(err);
 
        setErrors({
            ...errors,

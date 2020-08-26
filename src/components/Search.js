@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
+import SpotifyWebApi from 'spotify-web-api-js';
+import axios from 'axios';
 
 const SearchContainer = styled.div`
     max-width: 500px;
@@ -95,6 +97,20 @@ const SearchButton = styled.button`
         display: none;
     }
 `
+const LinkButton = styled.button`
+    font-size: 15px;
+    width: 85px;
+    height: 30px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 5px;
+    text-transform: lowercase;
+    margin-left: 5px;
+
+    @media (max-width: 550px) {
+        display: none;
+    }
+`
 
 const SearchInfo = styled.div`
     display: flex;
@@ -107,16 +123,23 @@ const SearchInfo = styled.div`
 
 
 const Search = () => {
+    const spotify = new SpotifyWebApi();
+    const clientId = 'c1a6838f444249b69a78c89074c2e47e';
+    const clientSecret = '89ba1ad2b279472fa33565b8394a748e';
 
     const [searchText, setSearchText] = useState()
+    const [spotifyToken, setToken] = useState()
 
     const searchSongs = (e) => {
         e.preventDefault();
-        
-        axiosWithAuth()
-        .get('/songs/', searchText)
-        .then((res) => console.log('search results', res))
-        .catch((res) => console.log('failed search', res))
+        spotify.setAccessToken(spotifyToken)
+        spotify.searchTracks(searchText)
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((res) => {
+            console.log(res)
+        })
     }
     
     const handleChanges = (e) => {
@@ -129,12 +152,33 @@ const Search = () => {
         setSearchText(newSearchString)
     }
 
+    const getToken = async () => {
+        const result = await fetch('https://accounts.spotify.com/api/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/x-www-form-urlencoded', 
+                'Authorization' : 'Basic ' + (new Buffer.from(clientId + ':' + clientSecret, 'utf-8').toString('base64'))
+            },
+            body: 'grant_type=client_credentials'
+        })
+        const data = result.json()
+        .then((res) => {
+            console.log(res.access_token)
+            setToken(res.access_token)
+            return data.access_token
+        })
+        
+    }
+
+
+
     return(<>
 
         <SearchContainer>
             <SearchBarContainer>
                 <SearchBar onChange={handleChanges} onSubmit={searchSongs} type='text' placeholder='Search For A Song'></SearchBar>
                 <SearchButton onSubmit={searchSongs}>Search</SearchButton>
+                <LinkButton onClick={getToken}>Link To Spotify</LinkButton>
             </SearchBarContainer>
             
             
