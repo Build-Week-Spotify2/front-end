@@ -5,9 +5,6 @@ import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {connect} from 'react-redux'
 import {setUser} from '../actions/signInActions';
 
-
-
-
 const SignIn = (props) => {
 
 //form visibility
