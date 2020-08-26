@@ -8,16 +8,21 @@ const SearchContainer = styled.div`
     padding: 10px;
     border-radius: 10px;
     background-color: #393C41;
+
+    @media (max-width: 500px) {
+        max-width: 450px;
+    }
 `
 
 const SearchBar = styled.input`
-    width: 425px;
+    max-width: 425px;
     height: 15px;
     margin: 0 auto;
     background-color: white;
     border-radius: 15px; 
     color: black;
-    text-align: center; 
+    text-align: center;
+
 `
 const SearchResults = styled.div`
     color: white;
@@ -25,6 +30,10 @@ const SearchResults = styled.div`
     align-items: center;
     justify-content: space-evenly;
     margin-top: 10px;
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+    }
 
 `
 
@@ -36,6 +45,7 @@ const SearchImage = styled.div`
 const SearchText = styled.div`
     color: white;
     line-height: .5em;
+    margin-left: 7px;
 `
 
 const AddSong = styled.div`
@@ -58,6 +68,11 @@ const Functionality = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
+
+    @media (max-width: 500px) {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
 `
 
 const SearchBarContainer = styled.div`
@@ -75,6 +90,16 @@ const SearchButton = styled.button`
     padding: 5px;
     text-transform: lowercase;
     margin-left: 5px;
+
+    @media (max-width: 550px) {
+        display: none;
+    }
+`
+
+const SearchInfo = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 `
 
 
@@ -115,14 +140,16 @@ const Search = () => {
             
             {/* This is placeholder data, will map thruogh search results when it's encorporated to the backend */}
                 <SearchResults>
-                    <SearchImage>
-                            <img src='https://i.scdn.co/image/ab67616d00001e02eaccf766c181fa3ff24048d4' alt='Album Artwork'/>
-                    </SearchImage>
-                    <SearchText>
-                        <p>Artist: The Ghost Inside</p>
-                        <p>Album: Get What You Give</p>
-                        <p>Song: Engine 45</p>
-                    </SearchText>
+                    <SearchInfo>
+                        <SearchImage>
+                                <img src='https://i.scdn.co/image/ab67616d00001e02eaccf766c181fa3ff24048d4' alt='Album Artwork'/>
+                        </SearchImage>
+                        <SearchText>
+                            <p>Artist: The Ghost Inside</p>
+                            <p>Album: Get What You Give</p>
+                            <p>Song: Engine 45</p>
+                        </SearchText>
+                    </SearchInfo>
                     <Functionality>
                         <AddSong>Save</AddSong>
                         <AddSong>Suggest</AddSong>

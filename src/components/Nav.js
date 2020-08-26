@@ -54,6 +54,7 @@ const NavBar = (props) => {
         <NavContainer>
             <NavItem><Link to='/dashboard'>Home</Link></NavItem>
             <NavItem><Link to='/saved-songs'>Saved Songs</Link></NavItem>
+            <NavItem><a href='https://spotify-build-dh.netlify.app/'>About</a></NavItem>
 
             {props.userOnProps.isLoggedIn ? (
             <NavUser>
