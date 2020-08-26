@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 
 const SearchContainer = styled.div`
     max-width: 500px;
@@ -59,11 +60,59 @@ const Functionality = styled.div`
     text-align: center;
 `
 
+const SearchBarContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const SearchButton = styled.button`
+    font-size: 15px;
+    width: 85px;
+    height: 30px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 5px;
+    text-transform: lowercase;
+    margin-left: 5px;
+`
+
+
+
+
+
 const Search = () => {
+
+    const [searchText, setSearchText] = useState()
+
+    const searchSongs = (e) => {
+        e.preventDefault();
+        
+        axiosWithAuth()
+        .get('/songs/', searchText)
+        .then((res) => console.log('search results', res))
+        .catch((res) => console.log('failed search', res))
+    }
+    
+    const handleChanges = (e) => {
+        e.persist();
+    
+        const newSearchString = {
+            ...searchText,
+            [e.target.name]: e.target.value
+        }
+        setSearchText(newSearchString)
+    }
+
     return(<>
 
         <SearchContainer>
-            <SearchBar type='text' placeholder='Search For A Song'></SearchBar>
+            <SearchBarContainer>
+                <SearchBar onChange={handleChanges} onSubmit={searchSongs} type='text' placeholder='Search For A Song'></SearchBar>
+                <SearchButton onSubmit={searchSongs}>Search</SearchButton>
+            </SearchBarContainer>
+            
+            
             {/* This is placeholder data, will map thruogh search results when it's encorporated to the backend */}
                 <SearchResults>
                     <SearchImage>
