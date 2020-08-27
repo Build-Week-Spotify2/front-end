@@ -5,7 +5,7 @@ import Graph from './Graph';
 
 const DashboardContainer = styled.div`
     max-width: 750px;
-    max-height: 750px;
+    max-height: 1000px;
     margin: 0 auto;
     padding: 10px;
     border-radius: 10px;
