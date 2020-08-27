@@ -37,7 +37,7 @@ div.nav-bar{
     text-decoration: none;
     text-align: center;
     font-size: 18px;
-    padding: 14px 40px ;
+    padding: 14px 16px ;
     float: right;
     transition: background .5s ease;
 }
@@ -86,92 +86,75 @@ div.nav-bar{
     border: 3px solid #1DB954;
 }
 
-@media(max-width: 800px){
-   
-    div.header-img{
-       
-    }
-    
-    #header-img{
-        
-    }
-    
-    div.nav-bar{
-       
-    }
-    
-    .nav-link{
-        
-    }
-    
-    .nav-link:hover{
-        
-    }
-    
-    .title{
-       
-    }
+@media(max-width: 1400px){
     
     #developers{
+        justify-content: space-evenly;
        
     }
     
     #developers figure{
-           
+        width: 30%;
     }
     
     #developers figure img{
-      
+        width: 100%;
+        height: auto;
+     }
+}
+
+
+@media(max-width: 1000px){   
+    
+    #developers{
+        justify-content: space-evenly;
+       
     }
     
-    #developers figure figcaption{
-        
-    } 
+    #developers figure{
+        width: 30%;
+    }
+    
+    #developers figure img{
+        width: 100%;
+        height: auto;
+     }
+    
+}
 
+
+@media(max-width: 800px){
+    
+    .title{
+       font-size: 2rem;
+    }
+    
+    #developers{
+        justify-content: space-evenly;
+       
+    }
+    
+    #developers figure{
+        width: 30%;
+    }
+    
+    #developers figure img{
+        width: 100%;
+        height: auto;
+     }
 }
 
 @media(max-width: 500px){
     
-    div.header-img{
-       
-    }
-    
-    #header-img{
-        
-    }
-    
-    div.nav-bar{
-       
-    }
-    
-    .nav-link{
-        
-    }
-    
-    .nav-link:hover{
-        
-    }
-    
     .title{
-       
-    }
-    
-    #developers{
+        font-size: 1.5rem;
        
     }
     
     #developers figure{
+        margin-bottom: 1rem;
            
-    }
-    
-    #developers figure img{
-      
-    }
-    
-    #developers figure figcaption{
-        
-    } 
-
+    }   
 }
 
 
