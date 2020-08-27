@@ -41,8 +41,6 @@ const loginUser = (e) => {
         localStorage.setItem('auth-token', res.data.token)
         e.persist();
         props.setUser(formState.username)
-        // console.log('succesful login', res)
-        
         props.history.push('/dashboard')
     })
     .catch((res) => {
@@ -56,7 +54,6 @@ const registerUser = (e) => {
     axiosWithAuth()
     .post('/auth/register', formState)
     .then((res) => {
-        // console.log('succesful registration', res)
         localStorage.setItem('auth-token', res.data.token)
         props.history.push('/dashboard')
     })
@@ -68,7 +65,6 @@ const registerUser = (e) => {
 
 //form validation
 useEffect(() => {
-    // console.log('Validating form')
     formSchema.isValid(formState)
 }, [formState])
 
@@ -101,14 +97,12 @@ const formSchema = yup.object().shape({
 //change handlers
 const inputChange = (e) => {
     e.persist();
-    // console.log("input changed", e.target.value);
     const newFormData = {
         ...formState,
         [e.target.name]: e.target.value
     }
     validateChange(e);
     setFormState(newFormData)
-    console.log(formState)
 }
 
     return(<>
