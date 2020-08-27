@@ -125,8 +125,89 @@ div.nav-bar{
 }
 
 @media(max-width: 800px){
-
-    h2{
-        font-size: 2rem;
+   
+    div.header-img{
+       
     }
+    
+    #header-img{
+        
+    }
+    
+    div.nav-bar{
+       
+    }
+    
+    .nav-link{
+        
+    }
+    
+    .nav-link:hover{
+        
+    }
+    
+    .title{
+       
+    }
+    
+    #developers{
+       
+    }
+    
+    #developers figure{
+           
+    }
+    
+    #developers figure img{
+      
+    }
+    
+    #developers figure figcaption{
+        
+    } 
+
+}
+
+@media(max-width: 500px){
+    
+    div.header-img{
+       
+    }
+    
+    #header-img{
+        
+    }
+    
+    div.nav-bar{
+       
+    }
+    
+    .nav-link{
+        
+    }
+    
+    .nav-link:hover{
+        
+    }
+    
+    .title{
+       
+    }
+    
+    #developers{
+       
+    }
+    
+    #developers figure{
+           
+    }
+    
+    #developers figure img{
+      
+    }
+    
+    #developers figure figcaption{
+        
+    } 
+
 }

@@ -80,3 +80,91 @@ div.nav-bar{
 .text p{
     margin-top: 10px;
 }
+
+@media(max-width: 800px){
+   
+    div.header-img{
+       
+    }
+    
+    #header-img{
+        
+    }
+    
+    div.nav-bar{
+       
+    }
+    
+    .nav-link{
+        
+    }
+    
+    .nav-link:hover{
+        
+    }
+    
+    .title{
+       
+    }
+    
+    #developers{
+       
+    }
+    
+    #developers figure{
+           
+    }
+    
+    #developers figure img{
+      
+    }
+    
+    #developers figure figcaption{
+        
+    } 
+
+}
+
+@media(max-width: 500px){
+    
+    div.header-img{
+       
+    }
+    
+    #header-img{
+        
+    }
+    
+    div.nav-bar{
+       
+    }
+    
+    .nav-link{
+        
+    }
+    
+    .nav-link:hover{
+        
+    }
+    
+    .title{
+       
+    }
+    
+    #developers{
+       
+    }
+    
+    #developers figure{
+           
+    }
+    
+    #developers figure img{
+      
+    }
+    
+    #developers figure figcaption{
+        
+    } 
+
+}
