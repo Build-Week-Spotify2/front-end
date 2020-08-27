@@ -108,6 +108,7 @@ const inputChange = (e) => {
     }
     validateChange(e);
     setFormState(newFormData)
+    console.log(formState)
 }
 
     return(<>
