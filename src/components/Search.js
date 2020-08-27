@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import{connect} from 'react-redux';
 import styled from 'styled-components';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import {setSearchedSongs} from '../actions/searchActions';
 import SearchResults from './SearchResults';
+import {connect} from 'react-redux';
 
 const SearchBar = styled.input`
     max-width: 425px;
@@ -55,7 +55,11 @@ const SearchBarGroup = styled.div`
 
 const SearchContainer = styled.div`
     max-height: 350px;
-    overflow-y: auto;
+
+`
+const SearchResultsContainer = styled.div`
+max-height: 350px;
+overflow-y: auto;
 
 `
 
@@ -129,13 +133,11 @@ const Search = (props) => {
             </SearchBarContainer>
 
                {props.searchedSongs.hasSearched ? (<>
-
-                {props.searchedSongs.songs.map(song => (
-                    <SearchContainer>
-                        <SearchResults key={song.id} songData={song} />
-                    </SearchContainer>
-                    
-                ))}
+                <SearchResultsContainer>
+                    {props.searchedSongs.songs.map(song => (
+                    <SearchResults key={song.id} songData={song} /> 
+                        ))}
+                </SearchResultsContainer>
                 
               </>) : (
                    <></>
