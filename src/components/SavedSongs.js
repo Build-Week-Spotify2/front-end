@@ -1,5 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components'
+import SavedSong from './SavedSong'
+import {axiosWithAuth} from '../utils/axiosWithAuth';
+import {connect} from 'react-redux';
 
 const SavedSongsContainer = styled.div`
     max-width: 500px;
@@ -8,59 +11,45 @@ const SavedSongsContainer = styled.div`
     border-radius: 10px;
     background-color: #393C41;
 `
-const SavedSong = styled.div`
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-top: 10px;
 
-`
 
-const SongImage = styled.div`
-    width: 100px;
-    height: 100px;
-`
 
-const SongInfo = styled.div`
-    color: white;
-    line-height: .5em;
-`
+const SavedSongs = (props) => {
 
-const RemoveSong = styled.div`
-    color: white;
-    text-align: center;
-    width: 30px;
-    padding: 5px 0px;
-    border-radius: 20px;
-    background-color: #1DB954;
+    const [favoriteSongs, setFavorites] = useState([{}])
 
-    &:hover {
-        background-color: red;
-        cursor: pointer;
-        font-weight: 900;
-        color: black;
-    }
-`
+    useEffect(() => {
+        axiosWithAuth()
+        .get('/songs')
+        .then((res) => {
+            console.log('song pull', res)
+            setFavorites(res.data)
+            console.log('favoriteSongs', favoriteSongs)
+        })
+        .catch((res) => {
+            console.log('failed song pull', res)
+        })
+    }, [])
 
-const SavedSongs = () => {
+
+
     return(<>
         <SavedSongsContainer>
-            <SavedSong>
-                <SongImage>
-                <img src='https://i.scdn.co/image/ab67616d00001e02eaccf766c181fa3ff24048d4' alt='Album Artwork'/>
-                </SongImage>
-                <SongInfo>
-                    <p>Artist: The Ghost Inside</p>
-                    <p>Album: Get What You Give</p>
-                    <p>Song: Engine 45</p>
-                </SongInfo>
-                <RemoveSong>
-                    X
-                </RemoveSong>
-            </SavedSong>
+            {favoriteSongs.map(song => (
+                <SavedSong key={song.id} songData={song}/>
+            ))}
+            
         </SavedSongsContainer>
     </>)
 }
 
-export default SavedSongs;
+const mapStateToProps = state => {
+    return {
+        favesOnProps: state.favesReducer
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    {}
+)(SavedSongs)

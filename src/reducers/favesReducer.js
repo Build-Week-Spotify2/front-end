@@ -3,7 +3,7 @@ export const initialState = {
     album: '',
     artist: '',
     image_url: '',
-    song_id: ''
+    spotify_id: ''
 
 }
 
@@ -15,8 +15,9 @@ export const favesReducer = (state = initialState, action) => {
                 title: action.payload.name,
                 album: action.payload.album.name,
                 artist: action.payload.artists[0].name,
-                image_url: action.payload.album.images[0].url,
-                song_id: action.payload.id
+                spotify_id: action.payload.id,
+                image_url: action.payload.album.images[0].url
+                
             }
 
             default:

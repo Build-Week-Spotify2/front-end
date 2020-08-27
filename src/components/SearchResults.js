@@ -55,16 +55,15 @@ const AddSong = styled.div`
 `
 
 const SearchResults = (props) => {
-    useEffect(() => {
-        props.setFaves(props.songData)
-    }, [])
+    // useEffect(() => {
+    //     props.setFaves(props.songData)
+    // }, [])
 
     const addFavorite = () => {
+        props.setFaves(props.songData)
         axiosWithAuth()
         .post('/songs', props.favesOnProps)
-        
         .then((res) => console.log('succesul post', res))
-        .then(console.log(props.favesOnProps))
         .catch((err) => console.log(err))
     }
 
@@ -85,7 +84,7 @@ const SearchResults = (props) => {
         </SearchInfo>
 
         <Functionality>
-            <AddSong onClick={ () => {addFavorite()}}>Save</AddSong>
+            <AddSong onClick={ () => addFavorite()}>Save</AddSong>
             <AddSong>Suggest</AddSong>
         </Functionality>
     
