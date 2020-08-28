@@ -86,6 +86,21 @@ div.nav-bar{
     border: 3px solid #1DB954;
 }
 
+div.footer-img{
+    width: 100%;
+    background-color: #666;
+    overflow: hidden;
+   
+    margin-top: 66px;
+}
+
+ #footer-img{
+    width: 300px;
+    margin: 0 auto;
+    display: block;
+    
+}
+
 @media(max-width: 1400px){
     
     #developers{

@@ -106,7 +106,7 @@ div.nav-bar{
     background-color: #666;
     width: 700px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 50px;
     border: 5px solid #1DB954;
     transition: text-shadow .5s ease;
 }
@@ -124,6 +124,24 @@ div.nav-bar{
     margin-top: 10px;
 }
 
+div.footer-img{
+    width: 100%;
+    background-color: #666;
+    overflow: hidden;
+   
+    margin-top: 66px;
+}
+
+ #footer-img{
+    width: 300px;
+    margin: 0 auto;
+    display: block;
+    
+}
+
+
+
+
 
 
 @media(max-width: 800px){
@@ -139,6 +157,8 @@ div.nav-bar{
     .text{
         width: 400px;
     }
+
+   
 }
 
 @media(max-width: 500px){
