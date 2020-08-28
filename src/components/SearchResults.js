@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {connect} from 'react-redux';
@@ -55,15 +55,26 @@ const AddSong = styled.div`
 `
 
 const SearchResults = (props) => {
-    // useEffect(() => {
-    //     props.setFaves(props.songData)
-    // }, [])
+
+    const [songInfo, setSongInfo] = useState()
+    useEffect(() => {
+        setSongInfo({
+            title: props.songData.name,
+            album: props.songData.album.name,
+            artist: props.songData.artists[0].name,
+            spotify_id: props.songData.id,
+            image_url: props.songData.album.images[0].url
+        })
+    }, [])
 
     const addFavorite = () => {
-        props.setFaves(props.songData)
+        // props.setFaves(props.songData)
         axiosWithAuth()
-        .post('/songs', props.favesOnProps)
+        .post('/songs', songInfo)
         .then((res) => console.log('succesul post', res))
+        .then((res) => {
+            props.setFaves(songInfo)
+        })
         .catch((err) => console.log(err))
     }
 

@@ -1,9 +1,6 @@
 export const initialState = {
-    title: '',
-    album: '',
-    artist: '',
-    image_url: '',
-    spotify_id: ''
+   favoriteSongs: []
+  
 
 }
 
@@ -12,11 +9,7 @@ export const favesReducer = (state = initialState, action) => {
         case 'SET_FAVORITE_SONG':
             return {
                 ...state,
-                title: action.payload.name,
-                album: action.payload.album.name,
-                artist: action.payload.artists[0].name,
-                spotify_id: action.payload.id,
-                image_url: action.payload.album.images[0].url
+                favoriteSongs: state.favoriteSongs.concat(action.payload)
                 
             }
 
