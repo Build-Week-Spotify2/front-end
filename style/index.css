@@ -166,6 +166,10 @@ div.footer-img{
     .text{
         width: 250px
     }
+
+    .nav-link{
+        font-size: 12px;
+    }
     
     
 }

@@ -169,7 +169,17 @@ div.footer-img{
     #developers figure{
         margin-bottom: 1rem;
            
-    }   
+    }
+
+    .nav-link{
+        font-size: 12px;
+    }
+
+    #developers figure figcaption{
+        font-size: .5rem;
+    }
+    
+
 }
 
 
