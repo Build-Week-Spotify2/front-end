@@ -4,6 +4,7 @@ import SavedSong from './SavedSong'
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {connect} from 'react-redux';
 import {setFaves, removeFaves} from '../actions/favesActions';
+import Graph from './Graph';
 
 const SavedSongsContainer = styled.div`
     max-width: 500px;
@@ -35,19 +36,26 @@ const SavedSongs = (props) => {
 
 
     return(<>
-        <SavedSongsContainer>
+    {props.visualsOnProps.isHidden ? (
 
-            {favoriteSongs.map(song => (
-                <SavedSong key={song.id} songData={song} />
-            ))}
-            
+        <SavedSongsContainer>
+        {favoriteSongs.map(song => (
+            <SavedSong key={song.id} songData={song} />
+        ))}
         </SavedSongsContainer>
+
+        ) : (
+        <Graph />  
+        )}
+        
     </>)
 }
 
 const mapStateToProps = state => {
     return {
-        favesOnProps: state.favesReducer
+        favesOnProps: state.favesReducer,
+        visualsOnProps: state.graphReducer
+
     }
 }
 

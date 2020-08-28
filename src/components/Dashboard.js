@@ -15,20 +15,12 @@ const DashboardContainer = styled.div`
     justify-content: center;
 `
 
-const SongGraph = styled.div`
-    color: black;
-    border: 1px solid white;
-    margin: 5px;
-`
+
 
 const Dashboard = () => {
     return (<>
         <DashboardContainer>
             <Search />
-
-            <SongGraph>
-                <Graph />
-            </SongGraph>
         </DashboardContainer>
     </>)
 }

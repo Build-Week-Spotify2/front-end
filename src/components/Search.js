@@ -123,7 +123,7 @@ const Search = (props) => {
         <SearchContainer>
             <SearchBarContainer>
                 <SearchBarGroup>
-                    <SearchBar onChange={handleChanges} onSubmit={searchSongs} type='text' name='searchString' placeholder='Search For A Song'></SearchBar>
+                    <SearchBar onChange={handleChanges} onSubmit={searchSongs} type='text' name='searchString' placeholder='Link Spotify Then Search'></SearchBar>
                     <SearchButton onClick={searchSongs}><FontAwesomeIcon icon={faSearch} /></SearchButton>
                 </SearchBarGroup>
                 
