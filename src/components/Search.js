@@ -54,12 +54,12 @@ const SearchBarGroup = styled.div`
 `
 
 const SearchContainer = styled.div`
-    max-height: 350px;
+    // max-height: 350px;
 
 `
 const SearchResultsContainer = styled.div`
-max-height: 350px;
-overflow-y: auto;
+// max-height: 350px;
+// overflow-y: auto;
 
 `
 
@@ -112,7 +112,7 @@ const Search = (props) => {
         .then((res) => {
             console.log(res.access_token)
             setToken(res.access_token)
-            spotify.setAccessToken(spotifyToken)
+            spotify.setAccessToken(res.access_token)
             return data.access_token
         })
         
