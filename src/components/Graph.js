@@ -22,10 +22,10 @@ const Graph = (props) => {
             indexLabel: "{label}: {y}",		
             startAngle: -90,
             dataPoints: [
-                { y: props.graphOnProps.Danceability, label: "Danceability" },
-                { y: props.graphOnProps.Instrumantalism, label: "Instrumantalism" },
-                { y: props.graphOnProps.Acousticness, label: "Acousticness" },
-                { y: props.graphOnProps.Loudness, label: "Loudness" }	
+                { y: (props.graphOnProps.dataPoints.danceability * 100), label: "Danceability" },
+                { y: (props.graphOnProps.dataPoints.energy * 100), label: "Energy" },
+                { y: (props.graphOnProps.dataPoints.acousticness * 100), label: "Acousticness" },
+                { y: (props.graphOnProps.dataPoints.liveness * 100), label: "Loudness" }	
             ]
         }]
     }

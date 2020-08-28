@@ -1,8 +1,5 @@
 export const initialOptions = {
-    Danceability: 10,
-    Instrumantalism: 10,
-    Acousticness: 10,
-    Loudness: 10
+    dataPoints: {}
 }
 
 export const graphReducer = (state = initialOptions, action) => {

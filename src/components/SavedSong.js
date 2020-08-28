@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react';
+import axios from 'axios';
 import {axiosWithAuth} from '../utils/axiosWithAuth'
 import styled from 'styled-components';
 import {connect} from 'react-redux';
+import {removeFaves} from '../actions/favesActions';
+import {setGraphData} from '../actions/graphActions';
 
 const SavedSongContainer = styled.div`
     color: white;
@@ -46,12 +49,24 @@ const SavedSong = (props) => {
         .delete(`/songs/${props.songData.id}`)
         .then((res) => {
             console.log('succesfully deleted', res)
-            window.location.href='/saved-songs'
         })
         
         .catch((res) => {
             console.log('failed deletion', res)
         })
+    }
+
+    const getVisual = () => {
+        axios
+        .get(`https://ds-bw-spotify.herokuapp.com/features/${encodeURI(props.songData.title)}`)
+        .then((res) => {
+            console.log('visuals', res)
+            props.setGraphData(res.data.features)
+        })
+        .catch((res) => {
+            console.log('failed visuals', res)
+        })
+
     }
 
     return(<>
@@ -67,8 +82,12 @@ const SavedSong = (props) => {
             <p>Song: {props.songData.title}</p>
         </SongInfo>
 
-        <RemoveSong onClick={ () => deleteSong()}>
+        <RemoveSong onClick={ () => {deleteSong()}}>
+        {/* ; props.removeFaves(props.songData); */}
             X
+        </RemoveSong>
+        <RemoveSong onClick={ () => {getVisual()}}>
+            ?
         </RemoveSong>
     </SavedSongContainer>
         
@@ -77,11 +96,12 @@ const SavedSong = (props) => {
 
 const mapStateToProps = state => {
     return {
-        favesOnProps: state.favesReducer
+        favesOnProps: state.favesReducer,
+        visualsOnProps: state.graphReducer
     }
 }
 
 export default connect(
     mapStateToProps,
-    {}
+    {removeFaves, setGraphData}
 )(SavedSong)

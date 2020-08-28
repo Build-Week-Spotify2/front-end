@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import SavedSong from './SavedSong'
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {connect} from 'react-redux';
-import {setFaves} from '../actions/favesActions';
+import {setFaves, removeFaves} from '../actions/favesActions';
 
 const SavedSongsContainer = styled.div`
     max-width: 500px;
@@ -26,7 +26,6 @@ const SavedSongs = (props) => {
             console.log('song pull', res)
             setFavorites(res.data)
             props.setFaves(res.data)
-            console.log('favoriteSongs', favoriteSongs)
         })
         .catch((res) => {
             console.log('failed song pull', res)
@@ -37,8 +36,9 @@ const SavedSongs = (props) => {
 
     return(<>
         <SavedSongsContainer>
+
             {favoriteSongs.map(song => (
-                <SavedSong key={song.id} songData={song}/>
+                <SavedSong key={song.id} songData={song} />
             ))}
             
         </SavedSongsContainer>
@@ -53,5 +53,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    {setFaves}
+    {setFaves, removeFaves}
 )(SavedSongs)
