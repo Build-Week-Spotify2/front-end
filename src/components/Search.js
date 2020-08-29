@@ -110,7 +110,7 @@ const Search = (props) => {
         })
         const data = result.json()
         .then((res) => {
-            console.log(res.access_token)
+            localStorage.setItem('spotify-auth', res.access_token)
             setToken(res.access_token)
             spotify.setAccessToken(res.access_token)
             return data.access_token

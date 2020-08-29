@@ -7,6 +7,7 @@ import SavedSongs from './components/SavedSongs';
 import { Route, Switch } from 'react-router-dom';
 import "./components/styles.css";
 import PrivateRoute from './components/PrivateRoute';
+import SuggestedSongs from './components/SuggestedSongs'
 
 function App() {
   return (<>
@@ -16,6 +17,7 @@ function App() {
       <Route exact path='/' component={SignIn} />
       <PrivateRoute path='/dashboard' component={Dashboard} />
       <PrivateRoute path='/saved-songs' component={SavedSongs} />
+      <PrivateRoute path='/suggested-songs' component={SuggestedSongs} />
     </Switch>
    
   </>);

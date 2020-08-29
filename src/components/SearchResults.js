@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
+import {spotifyWithAuth} from '../utils/spotifyWithAuth';
 import {connect} from 'react-redux';
 import {setFaves} from '../actions/favesActions';
-
+import {setSuggestions, setSuggestedData} from '../actions/suggestionActions';
+import SuggestedSongs from './SuggestedSongs';
+import {useHistory} from 'react-router-dom';
 
 const ResultsContainer = styled.div`
     display: flex;
@@ -56,6 +60,19 @@ const AddSong = styled.div`
 
 const SearchResults = (props) => {
 
+    const [suggestedSongs, setSuggestedSongs] = useState([])
+
+    useEffect(() => {
+        spotifyWithAuth()
+        .get(`tracks/?ids=${props.suggestionsOnProps.suggestionIds.toString()}`)
+        .then((res) => {
+            console.log('suggested song data', res)
+            props.setSuggestedData(res.data.tracks)
+            setSuggestedSongs(res.data.tracks)    
+        })
+    }, [props.suggestionsOnProps.suggestionsMade])
+    
+
     const [songInfo, setSongInfo] = useState()
     useEffect(() => {
         setSongInfo({
@@ -68,7 +85,6 @@ const SearchResults = (props) => {
     }, [])
 
     const addFavorite = () => {
-        // props.setFaves(props.songData)
         axiosWithAuth()
         .post('/songs', songInfo)
         .then((res) => console.log('succesul post', res))
@@ -78,39 +94,70 @@ const SearchResults = (props) => {
         .catch((err) => console.log(err))
     }
 
+    let history = useHistory();
+    const suggestSongs = () => {
+        
+        axios
+            .post(`https://ds-bw-spotify.herokuapp.com/predict?item=${props.songData.id}`)
+            .then((res) => {
+                console.log('song suggestions pulled', res)
+                props.setSuggestions(res.data.recommendations)
+                history.push('/suggested-songs')
+            })
+            // .then(
+            //     spotifyWithAuth()
+            //     .get(`tracks/?ids=${props.suggestionsOnProps.suggestionIds.toString()}`)
+            //     .then((res) => {
+            //         console.log('suggested song data', res)
+            //     })
+            // )
+            .catch((res) => console.log('failed song suggestions', res))
+    }
+
+
+
+
     return(<>
 
-    
-    <ResultsContainer>
+    {/* {props.suggestionsOnProps.suggestionsMade ? (
 
-        <SearchInfo >  
-            <SearchImage>
-                <img src={props.songData.album.images[0].url} alt='Album Artwork'/>   
-            </SearchImage>
-            <SearchText>
-                <p>Artist: {props.songData.artists[0].name}</p>
-                <p>Album: {props.songData.album.name}</p>
-                <p>Song: {props.songData.name}</p>
-            </SearchText>   
-        </SearchInfo>
+        <SuggestedSongs suggestions={suggestedSongs} />
 
-        <Functionality>
-            <AddSong onClick={ () => addFavorite()}>Save</AddSong>
-            <AddSong>Suggest</AddSong>
-        </Functionality>
+        ) : ( */}
+            <ResultsContainer>
+
+            <SearchInfo >  
+                <SearchImage>
+                    <img src={props.songData.album.images[0].url} alt='Album Artwork'/>   
+                </SearchImage>
+                <SearchText>
+                    <p>Artist: {props.songData.artists[0].name}</p>
+                    <p>Album: {props.songData.album.name}</p>
+                    <p>Song: {props.songData.name}</p>
+                </SearchText>   
+            </SearchInfo>
     
-    </ResultsContainer>
+            <Functionality>
+                <AddSong onClick={ () => addFavorite()}>Save</AddSong>
+                <AddSong onClick={ () => suggestSongs()}>Suggest</AddSong>
+            </Functionality>
+        
+        </ResultsContainer>
+    
+        
+
 
 </>)
 }
 
 const mapStateToProps = state => {
     return {
-        favesOnProps: state.favesReducer
+        favesOnProps: state.favesReducer,
+        suggestionsOnProps: state.suggestionsReducer
     }
 }
 
 export default connect(
     mapStateToProps,
-    {setFaves}
+    {setFaves, setSuggestions, setSuggestedData}
 )(SearchResults)
