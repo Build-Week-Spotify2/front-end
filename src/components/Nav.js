@@ -46,6 +46,7 @@ const NavUser = styled.div`
 
 function signOut() {
     localStorage.removeItem('auth-token')
+    window.localStorage.removeItem('')
     window.location.href='/'
 }
 
@@ -54,11 +55,12 @@ const NavBar = (props) => {
         <NavContainer>
             <NavItem><Link to='/dashboard'>Home</Link></NavItem>
             <NavItem><Link to='/saved-songs'>Saved Songs</Link></NavItem>
+            <NavItem><Link to='/playlists'>Playlists</Link></NavItem>
             <NavItem><a href='https://spotify-build-dh.netlify.app/'>About</a></NavItem>
 
             {props.userOnProps.isLoggedIn ? (
             <NavUser>
-                <div className='username'>{props.userOnProps.username}</div>
+                <div className='username'>{props.userOnProps.user}</div>
                 <div onClick={signOut} className='sign-out'>Sign Out</div>
             </NavUser>
             ) : (

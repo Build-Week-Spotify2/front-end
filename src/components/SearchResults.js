@@ -6,8 +6,9 @@ import {spotifyWithAuth} from '../utils/spotifyWithAuth';
 import {connect} from 'react-redux';
 import {setFaves} from '../actions/favesActions';
 import {setSuggestions, setSuggestedData} from '../actions/suggestionActions';
-import SuggestedSongs from './SuggestedSongs';
-import {useHistory} from 'react-router-dom';
+import {selectPlaylist, setSongToAdd} from '../actions/playlistActions';
+import {useHistory, Link} from 'react-router-dom';
+import PlaylistSelection from './PlaylistSelection';
 
 const ResultsContainer = styled.div`
     display: flex;
@@ -94,6 +95,7 @@ const SearchResults = (props) => {
         .catch((err) => console.log(err))
     }
 
+
     let history = useHistory();
     const suggestSongs = () => {
         
@@ -118,12 +120,7 @@ const SearchResults = (props) => {
 
 
     return(<>
-
-    {/* {props.suggestionsOnProps.suggestionsMade ? (
-
-        <SuggestedSongs suggestions={suggestedSongs} />
-
-        ) : ( */}
+            
             <ResultsContainer>
 
             <SearchInfo >  
@@ -138,12 +135,13 @@ const SearchResults = (props) => {
             </SearchInfo>
     
             <Functionality>
-                <AddSong onClick={ () => addFavorite()}>Save</AddSong>
+                <AddSong onClick={ () => props.selectPlaylist()}>Save</AddSong>
+                <Link to='/select-playlist'><AddSong onClick={() => props.setSongToAdd(songInfo)}>Add*</AddSong></Link>
                 <AddSong onClick={ () => suggestSongs()}>Suggest</AddSong>
             </Functionality>
         
         </ResultsContainer>
-    
+    {/* )} */}
         
 
 
@@ -153,11 +151,13 @@ const SearchResults = (props) => {
 const mapStateToProps = state => {
     return {
         favesOnProps: state.favesReducer,
-        suggestionsOnProps: state.suggestionsReducer
+        suggestionsOnProps: state.suggestionsReducer,
+        playlistsOnProps: state.playlistReducer,
+        searchOnProps: state.searchReducer
     }
 }
 
 export default connect(
     mapStateToProps,
-    {setFaves, setSuggestions, setSuggestedData}
+    {setFaves, setSuggestions, setSuggestedData, selectPlaylist, setSongToAdd}
 )(SearchResults)

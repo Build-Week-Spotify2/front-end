@@ -38,8 +38,9 @@ const loginUser = (e) => {
     axiosWithAuth()
     .post('/auth/login', formState)
     .then((res) => {
+        console.log(res)
         localStorage.setItem('auth-token', res.data.token)
-        e.persist();
+        localStorage.setItem('user-id', res.data.id)
         props.setUser(formState.username)
         props.history.push('/dashboard')
     })
@@ -55,6 +56,8 @@ const registerUser = (e) => {
     .post('/auth/register', formState)
     .then((res) => {
         localStorage.setItem('auth-token', res.data.token)
+        localStorage.setItem('user-id', res.data.id)
+        props.setUser(formState.username)
         props.history.push('/dashboard')
     })
     .catch((res) => {

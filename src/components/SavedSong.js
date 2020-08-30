@@ -83,7 +83,6 @@ const SavedSong = (props) => {
         </SongInfo>
 
         <RemoveSong onClick={ () => {deleteSong()}}>
-        {/* ; props.removeFaves(props.songData); */}
             X
         </RemoveSong>
         <RemoveSong onClick={ () => {getVisual()}}>

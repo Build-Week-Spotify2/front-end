@@ -1,6 +1,6 @@
 export const initialState = {
     isLoggedIn: false,
-    username: ''
+    user: ''
 }
 
 export const signInReducer = (state = initialState, action) => {
@@ -9,7 +9,7 @@ export const signInReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoggedIn: true,
-                username: action.payload
+                user: action.payload
 
             };
 
