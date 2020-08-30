@@ -13,3 +13,7 @@ export const songsOnPlaylist = songs => {
 export const purgePlaylistData = data => {
     return {type: 'PURGE_PLAYLIST_DATA', payload: data}
 }
+
+export const deleteSongFromPlaylist = song => {
+    return {type: 'DELETE_SONG_FROM_PLAYLIST', payload: song}
+}

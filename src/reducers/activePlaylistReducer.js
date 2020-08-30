@@ -28,6 +28,13 @@ export const activePlaylistReducer = (state = initialState, action) => {
         case 'PURGE_PLAYLIST_DATA':
             return initialState
 
+        case 'DELETE_SONG_FROM_PLAYLIST':
+            return {
+                songsOnPlaylist: [
+                    ...state.songsOnPlaylist.filter(list => list ===action.payload)
+                ]
+            }
+
             default:
                 return state;
     }

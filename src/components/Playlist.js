@@ -28,9 +28,7 @@ const PlaylistContainer = styled.div`
 `
 const Playlist = (props) => {
 
-    useEffect(() => {
-        props.purgePlaylistData()
-    }, [])
+
 
 
     const [formState, setFormState] = useState({

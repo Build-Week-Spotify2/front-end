@@ -2,7 +2,18 @@ import React, {useState, useEffect} from 'react'
 import {useParams, useHistory} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
+import SongOnPlaylist from './SongOnPlaylist';
+import styled from 'styled-components';
+import Graph from './Graph';
 import {setUserSongs, focusSongsOnPlaylist, songsOnPlaylist, purgePlaylistData} from '../actions/activePlaylistActions';
+
+const SongContainer = styled.div`
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #393C41;
+`
 
 const ActivePlaylist = (props) => {
     let history = useHistory();
@@ -57,35 +68,28 @@ const ActivePlaylist = (props) => {
     }, [params.id])
 
     return(<>
-        {/* {props.activePlaylistOnProps.songsOnPlaylist.length ? (<>
-            <p onClick={() => {history.goBack(); props.purgePlaylistData()}}>GoBack</p>
 
-            {props.activePlaylistOnProps.songsOnPlaylist.map(item => (
-                <div>
-                    <h2>{item.artist}</h2> | <p>{item.title}</p>
-                </div>
+        {props.visualsOnProps.isHidden ? (
+            <SongContainer>
+                <p onClick={() => {history.goBack(); props.purgePlaylistData()}}> ← </p>
+                {props.activePlaylistOnProps.songsOnPlaylist.map(item => (
+                <SongOnPlaylist playlistId={params.id} key={item.spotify_id} songData={item} />
+                ))}
+            </SongContainer>
 
-            ))}
-            
+                ) : (
 
-        </>) : (
-            <p>Just a sec while we load your playlist</p>
-        )} */}
-<p onClick={() => {history.goBack(); props.purgePlaylistData()}}>GoBack</p>
-{props.activePlaylistOnProps.songsOnPlaylist.map(item => (<>
-    
-                <div>
-                    <h2>{item.artist}</h2> | <p>{item.title}</p>
-                </div>
+            <Graph />
 
-            </>))}
+        )}
         
     </>)
 }
 
 const mapStateToProps = state => {
     return {
-        activePlaylistOnProps: state.activePlaylistReducer
+        activePlaylistOnProps: state.activePlaylistReducer,
+        visualsOnProps: state.graphReducer
 
     }
 }
