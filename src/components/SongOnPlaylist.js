@@ -46,16 +46,25 @@ const SongOnPlaylist = (props) => {
     const params = useParams();
 
 
-    const deleteSong = () => {
+    const deleteSongFromList = () => {
         axiosWithAuth()
         .delete(`/playlist_songs/${props.songData.id}`)
         .then((res) => {
-            console.log('succesfully deleted', res)
+            console.log('deleted from list', res)
         })
         
         .catch((res) => {
             console.log('failed deletion', res)
         })
+       
+        
+
+    }
+    const deleteSongFromDb = () => {
+        axiosWithAuth()
+        .delete(`/songs/${props.songData.id}`)
+        .then((res) => {console.log('succesfully deleted from DB', res)})
+        .catch((res) => {console.log('failed to delete from DB', res)})
     }
 
     const getVisual = () => {
@@ -83,7 +92,7 @@ const SongOnPlaylist = (props) => {
                 <p>Song: {props.songData.title}</p>
             </SongInfo>
 
-            <RemoveSong onClick={ () => {deleteSong(); props.deleteSongFromPlaylist(props.songData);}}>
+            <RemoveSong onClick={ () => {  deleteSongFromList(); deleteSongFromDb(); props.deleteSongFromPlaylist(props.songData);}}>
                 X
             </RemoveSong>
             <RemoveSong onClick={ () => {getVisual()}}>

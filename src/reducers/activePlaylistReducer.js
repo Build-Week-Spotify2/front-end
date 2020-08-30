@@ -15,8 +15,7 @@ export const activePlaylistReducer = (state = initialState, action) => {
         case 'FOCUS_SONGS_ON_PLAYLIST':
             return {
                ...state,
-               songIds: action.payload
-               
+               songIds: action.payload 
             };
 
         case 'SONGS_ON_PLAYLIST':
@@ -30,8 +29,9 @@ export const activePlaylistReducer = (state = initialState, action) => {
 
         case 'DELETE_SONG_FROM_PLAYLIST':
             return {
+                ...state,
                 songsOnPlaylist: [
-                    ...state.songsOnPlaylist.filter(list => list ===action.payload)
+                    ...state.songsOnPlaylist.filter(list => list !== action.payload)
                 ]
             }
 

@@ -23,19 +23,24 @@ const SongInfo = styled.div`
     line-height: .5em;
 `
 
-const RemoveSong = styled.div`
+const Functionality = styled.div`
+    display: flex;
+    align-content: center;
+    justify-content: center;
+`
+const FunctionButton = styled.div`
     color: white;
     text-align: center;
-    width: 30px;
-    padding: 5px 0px;
+    width: 60px;
+    padding: 5px 3px;
     border-radius: 20px;
-    background-color: #1DB954;
+    background-color: black;
+    margin: 5px;
 
     &:hover {
-        background-color: red;
+        background-color: #1DB954;
         cursor: pointer;
         font-weight: 900;
-        color: black;
     }
 `
 
@@ -73,12 +78,11 @@ const SuggestedSong = (props) => {
             <p>Song: {props.songData.name}</p>
         </SongInfo>
 
-        <RemoveSong >
-            X
-        </RemoveSong>
-        <RemoveSong onClick={() => {addFavorite()}}>
-            +
-        </RemoveSong>
+        <Functionality>
+            <FunctionButton >Info</FunctionButton>
+            <FunctionButton onClick={() => {addFavorite()}}>Save</FunctionButton>
+        </Functionality>
+
     </SuggestedSongContainer>
         
     </>)

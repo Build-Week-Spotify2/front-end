@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
@@ -22,7 +23,7 @@ const NavItem = styled.div`
     margin: 5px;
     padding: 5px;
     border-radius: 10px;
-    background-color: white;
+    background-color: black;
 
     &:hover {
         background-color: #1DB954;
@@ -44,21 +45,22 @@ const NavUser = styled.div`
 
 `
 
-function signOut() {
-    localStorage.removeItem('auth-token')
-    window.localStorage.removeItem('')
-    window.location.href='/'
-}
-
 const NavBar = (props) => {
+
+    function signOut() {
+        localStorage.removeItem('auth-token')
+        window.localStorage.removeItem('spotify-auth')
+        window.location.href='/'
+    }
+
     return(
         <NavContainer>
             <NavItem><Link to='/dashboard'>Home</Link></NavItem>
-            <NavItem><Link to='/saved-songs'>Saved Songs</Link></NavItem>
+            {/* <NavItem><Link to='/saved-songs'>Saved Songs</Link></NavItem> */}
             <NavItem><Link to='/playlists'>Playlists</Link></NavItem>
             <NavItem><a href='https://spotify-build-dh.netlify.app/'>About</a></NavItem>
 
-            {props.userOnProps.isLoggedIn ? (
+            {localStorage.getItem('auth-token') ? (
             <NavUser>
                 <div className='username'>{props.userOnProps.user}</div>
                 <div onClick={signOut} className='sign-out'>Sign Out</div>

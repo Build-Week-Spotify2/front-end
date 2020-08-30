@@ -24,8 +24,37 @@ const Close = styled.div`
     border-radius: 10px;
 `
 const PlaylistContainer = styled.div`
-    border: 1px solid white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 5px 5px black;
+    margin: 20px;
 `
+const PlaylistTitle = styled.h2`
+    text-align: center;
+    font-size: 20px;
+`
+const PlaylistFunctionality = styled.div`
+    display: flex;
+    align-content: center;
+    justify-content: center;
+`
+const FunctionButton = styled.div`
+    color: white;
+    text-align: center;
+    width: 60px;
+    padding: 5px 3px;
+    border-radius: 20px;
+    background-color: black;
+    margin: 5px;
+
+    &:hover {
+        background-color: #1DB954;
+        cursor: pointer;
+        font-weight: 900;
+    }
+`
+
 const Playlist = (props) => {
 
 
@@ -101,10 +130,12 @@ const Playlist = (props) => {
 
         
         <PlaylistContainer>
-        <p>{playlistName}</p>
-        <div onClick={() => {setEdit()}}>edit</div>
-        <div onClick={() => {deletePlaylistEntry(); props.deletePlaylist(props.playlistData)}}>Delete</div>
-        <Link to={`/playlist/${props.playlistData.id}`}>View</Link>
+            <PlaylistTitle>{playlistName}</PlaylistTitle>
+            <PlaylistFunctionality>
+                <FunctionButton onClick={() => {setEdit()}}>Edit</FunctionButton>
+                <FunctionButton onClick={() => {deletePlaylistEntry(); props.deletePlaylist(props.playlistData)}}>Delete</FunctionButton>
+                <FunctionButton><Link to={`/playlist/${props.playlistData.id}`}>View</Link></FunctionButton>
+            </PlaylistFunctionality>
         </PlaylistContainer>
 
         )}

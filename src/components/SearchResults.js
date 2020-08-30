@@ -8,7 +8,6 @@ import {setFaves} from '../actions/favesActions';
 import {setSuggestions, setSuggestedData} from '../actions/suggestionActions';
 import {selectPlaylist, setSongToAdd} from '../actions/playlistActions';
 import {useHistory, Link} from 'react-router-dom';
-import PlaylistSelection from './PlaylistSelection';
 
 const ResultsContainer = styled.div`
     display: flex;
@@ -98,7 +97,6 @@ const SearchResults = (props) => {
 
     let history = useHistory();
     const suggestSongs = () => {
-        
         axios
             .post(`https://ds-bw-spotify.herokuapp.com/predict?item=${props.songData.id}`)
             .then((res) => {
@@ -106,13 +104,6 @@ const SearchResults = (props) => {
                 props.setSuggestions(res.data.recommendations)
                 history.push('/suggested-songs')
             })
-            // .then(
-            //     spotifyWithAuth()
-            //     .get(`tracks/?ids=${props.suggestionsOnProps.suggestionIds.toString()}`)
-            //     .then((res) => {
-            //         console.log('suggested song data', res)
-            //     })
-            // )
             .catch((res) => console.log('failed song suggestions', res))
     }
 
@@ -137,11 +128,10 @@ const SearchResults = (props) => {
             <Functionality>
                 <AddSong onClick={ () => props.selectPlaylist()}>Save</AddSong>
                 <Link to='/select-playlist'><AddSong onClick={() => props.setSongToAdd(songInfo)}>Add*</AddSong></Link>
-                <AddSong onClick={ () => suggestSongs()}>Suggest</AddSong>
+                <AddSong onClick={ () => {suggestSongs()}}>Suggest</AddSong>
             </Functionality>
         
         </ResultsContainer>
-    {/* )} */}
         
 
 

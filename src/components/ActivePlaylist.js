@@ -14,14 +14,23 @@ const SongContainer = styled.div`
     border-radius: 10px;
     background-color: #393C41;
 `
+const Back = styled.span`
+    font-size: 25px;
+    font-weight: 900;
+
+    &:hover {
+        background-color: #1DB954;
+        border-radius: 10px;
+        padding: 0px 5px;
+        cursor: pointer;
+        font-weight: 900;
+    }
+
+`
 
 const ActivePlaylist = (props) => {
     let history = useHistory();
     const params = useParams();
-
-    const [playlistIds, setPlaylistIds] = useState()
-
-    
 
     useEffect(() => {
         axiosWithAuth()
@@ -71,7 +80,7 @@ const ActivePlaylist = (props) => {
 
         {props.visualsOnProps.isHidden ? (
             <SongContainer>
-                <p onClick={() => {history.goBack(); props.purgePlaylistData()}}> ← </p>
+                <Back onClick={() => {history.goBack(); props.purgePlaylistData()}}> ← </Back>
                 {props.activePlaylistOnProps.songsOnPlaylist.map(item => (
                 <SongOnPlaylist playlistId={params.id} key={item.spotify_id} songData={item} />
                 ))}
