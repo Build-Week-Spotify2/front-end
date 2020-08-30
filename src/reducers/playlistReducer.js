@@ -50,7 +50,7 @@ export const playlistReducer = (state = initialState, action) => {
                 usersPlaylists: [
                     ...state.usersPlaylists.filter(list => list !== action.payload)
                 ]
-            }
+            };
 
             default:
                 return state;

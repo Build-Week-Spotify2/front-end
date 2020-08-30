@@ -11,7 +11,8 @@ import PrivateRoute from './components/PrivateRoute';
 import SuggestedSongs from './components/SuggestedSongs';
 import Playlists from './components/Playlists';
 import ActivePlaylist from './components/ActivePlaylist';
-import PlaylistSelection from './components/PlaylistSelection'
+import PlaylistSelection from './components/PlaylistSelection';
+import Graph from './components/Graph';
 
 const App = (props) => {
   return (<>
@@ -24,6 +25,7 @@ const App = (props) => {
       <PrivateRoute path='/playlist/:id' >
         <ActivePlaylist userPlaylists={props.playlistOnProps.usersPlaylists} />
       </PrivateRoute>
+      <PrivateRoute path='/playlist/:id/:song' component={Graph} />
       <PrivateRoute path='/saved-songs' component={SavedSongs} />
       <PrivateRoute path='/suggested-songs' component={SuggestedSongs} />
       <PrivateRoute path='/select-playlist' component={PlaylistSelection} />
@@ -34,7 +36,9 @@ const App = (props) => {
 
 const mapStateToProps = state => {
   return {
-      playlistOnProps: state.playlistReducer
+      playlistOnProps: state.playlistReducer,
+      visualsOnProps: state.graphReducer
+
 
   }
 }

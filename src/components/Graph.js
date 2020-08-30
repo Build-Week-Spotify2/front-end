@@ -1,4 +1,5 @@
 import React from 'react';
+import {useParams, useHistory} from 'react-router-dom'
 import CanvasJSReact from '../canvasjs.react'
 import {connect} from 'react-redux';
 import {setGraphData, purgeOptions} from '../actions/graphActions';
@@ -30,6 +31,8 @@ const Functionality = styled.div`
 
 
 const Graph = (props) => {
+    let history = useHistory();
+    const params = useParams();
 
     const options = {
         animationEnabled: true,
@@ -53,6 +56,7 @@ const Graph = (props) => {
 
     return(<>
         <GraphContainer>
+            <h2>Graph here</h2>
             <Functionality onClick={() => {props.purgeOptions()}}>
                 x
             </Functionality>
