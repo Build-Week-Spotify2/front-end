@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
@@ -8,9 +7,9 @@ import {Link} from 'react-router-dom';
 import {purgePlaylistData} from '../actions/activePlaylistActions';
 
 const FormContainer = styled.div`
-    border: 1px solid white;
-    border-radius: 10px;
-    padding-bottom: 5px;
+    padding: 10px 10px;
+    box-shadow: 2px 2px 5px 5px black;
+    margin: 20px;
 `
 const Close = styled.div`
     display: flex;
@@ -22,6 +21,12 @@ const Close = styled.div`
     width: 20px;
     margin: 5px;
     border-radius: 10px;
+
+    &:hover {
+        background-color: #1DB954;
+        cursor: pointer;
+        font-weight: 900;
+    }
 `
 const PlaylistContainer = styled.div`
     border-radius: 5px;

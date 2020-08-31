@@ -13,6 +13,12 @@ export const playlistReducer = (state = initialState, action) => {
                 ...state,
                 isAdding: true
             };
+        
+        case 'CANCEL_CREATE_PLAYLIST':
+            return{
+                ...state,
+                isAdding: false
+            };
 
         case 'ADD_PLAYLIST':
             return {

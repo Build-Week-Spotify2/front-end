@@ -2,9 +2,33 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
-import {createPlaylist, addPlaylist, addNewPlaylist} from '../actions/playlistActions';
+import {createPlaylist, addPlaylist, addNewPlaylist, cancelAdd} from '../actions/playlistActions';
 import Playlist from './Playlist';
-import {Link} from 'react-router-dom';
+
+
+const FormContainer = styled.div`
+    padding: 10px 10px;
+    box-shadow: 2px 2px 5px 5px black;
+    margin: 0 auto;
+    max-width: 500px;
+`
+const Close = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color white;
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #1DB954;
+        cursor: pointer;
+        font-weight: 900;
+    }
+`
 
 const PlaylistsContainer = styled.div`
     max-width: 500px;
@@ -87,22 +111,23 @@ const Playlists = (props) => {
     return(<>
 
         {props.playlistOnProps.isAdding ? (
-            
-            <form id='playlist-form' onSubmit={submitNewPlaylist}>
 
-            <label htmlFor="title">
-                Playlist Name
-                <input
-                type="text"
-                name="title"
-                value={formState.title}
-                onChange={inputChange}
-                />
-            </label>
+            <FormContainer>
+                <Close onClick={() => {props.cancelAdd()}}>X</Close>
+                <form id='playlist-form' onSubmit={submitNewPlaylist}>
+                    <label htmlFor="title">
+                        Playlist Name
+                        <input
+                        type="text"
+                        name="title"
+                        value={formState.title}
+                        onChange={inputChange}
+                        />
+                    </label>
+                    <button type="submit" >Create</button>
+                </form>
+            </FormContainer>            
 
-            <button type="submit" >Create</button>
-
-        </form>
 
         ) : (
 
@@ -136,5 +161,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    {createPlaylist, addPlaylist, addNewPlaylist}
+    {createPlaylist, addPlaylist, addNewPlaylist, cancelAdd}
 )(Playlists)

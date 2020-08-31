@@ -41,7 +41,6 @@ const PlaylistSelection = (props) => {
       }
 
     return(<>
-        <p>Playlist Editor</p>
         <Back onClick={() => history.goBack()}>←</Back>
         {props.playlistsOnProps.usersPlaylists.map(list => (
             <SelectedPlaylist key={list.id} playlist={list} songToAdd={props.playlistsOnProps.songToAdd} />

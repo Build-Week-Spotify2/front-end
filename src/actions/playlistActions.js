@@ -6,6 +6,10 @@ export const addPlaylist = playlistToAdd => {
     return {type: 'ADD_PLAYLIST', payload: playlistToAdd}
 }
 
+export const cancelAdd = canceledList => {
+    return {type: 'CANCEL_CREATE_PLAYLIST', payload: canceledList}
+}
+
 export const addNewPlaylist = newPlaylist => {
     return {type: 'ADD_NEW_PLAYLIST', payload: newPlaylist}
 }
