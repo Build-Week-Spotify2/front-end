@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import axios from 'axios'
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {setGraphData} from '../actions/graphActions';
+import {selectPlaylist, setSongToAdd} from '../actions/playlistActions';
 
 
 const SuggestedSongContainer = styled.div`
@@ -102,7 +104,7 @@ const SuggestedSong = (props) => {
 
         <Functionality>
             <FunctionButton onClick={ () => {getVisual()}}>Info</FunctionButton>
-            <FunctionButton onClick={() => {addFavorite()}}>Save</FunctionButton>
+            <Link to='/select-playlist'><FunctionButton onClick={() => props.setSongToAdd(songInfo)}>Add</FunctionButton></Link>
         </Functionality>
 
     </SuggestedSongContainer>
@@ -114,11 +116,12 @@ const mapStateToProps = state => {
     return {
         favesOnProps: state.favesReducer,
         suggestionsOnProps: state.suggestionsReducer,
-        visualsOnProps: state.graphReducer
+        visualsOnProps: state.graphReducer,
+        playlistsOnProps: state.playlistReducer,
     }
 }
 
 export default connect(
     mapStateToProps,
-    {setGraphData}
+    {setGraphData, setSongToAdd}
 )(SuggestedSong)
