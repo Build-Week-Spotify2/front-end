@@ -20,6 +20,12 @@ export const playlistReducer = (state = initialState, action) => {
                 usersPlaylists: action.payload,
                 isAdding: false
             };
+        
+        case 'ADD_NEW_PLAYLIST':
+            return {
+                ...state,
+                userPlaylists: state.userPlaylists.concat(action.payload)
+            }
 
         case 'SELECT_PLAYLIST':
             return {

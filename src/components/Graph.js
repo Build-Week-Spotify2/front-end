@@ -56,15 +56,11 @@ const Graph = (props) => {
 
     return(<>
         <GraphContainer>
-            <h2>Graph here</h2>
             <Functionality onClick={() => {props.purgeOptions()}}>
                 x
             </Functionality>
             <CanvasJSChart options = {options} />
         </GraphContainer>
-
-        
-        
     </>)
 }
 

@@ -6,6 +6,20 @@ import styled from 'styled-components';
 import {addPlaylist} from '../actions/playlistActions';
 import SelectedPlaylist from './SelectedPlaylist';
 
+const Back = styled.span`
+    font-size: 25px;
+    font-weight: 900;
+
+    &:hover {
+        background-color: #1DB954;
+        border-radius: 10px;
+        padding: 0px 5px;
+        cursor: pointer;
+        font-weight: 900;
+        
+    }
+`
+
 const PlaylistSelection = (props) => {
 
     let history = useHistory();
@@ -28,7 +42,7 @@ const PlaylistSelection = (props) => {
 
     return(<>
         <p>Playlist Editor</p>
-        <div onClick={() => history.goBack()}>Back</div>
+        <Back onClick={() => history.goBack()}>←</Back>
         {props.playlistsOnProps.usersPlaylists.map(list => (
             <SelectedPlaylist key={list.id} playlist={list} songToAdd={props.playlistsOnProps.songToAdd} />
         ))}

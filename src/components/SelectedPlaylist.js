@@ -3,6 +3,37 @@ import {connect} from 'react-redux';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 
+const PlaylistContainer = styled.div`
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    box-shadow: 2px 2px 5px 5px black;
+    margin: 20px;
+`
+const Add = styled.div`
+    color: white;
+    text-align: center;
+    width: 80px;
+    padding: 5px 3px;
+    border-radius: 20px;
+    background-color: black;
+    margin: 5px;
+
+    &:hover {
+        background-color: #1DB954;
+        cursor: pointer;
+        font-weight: 900;
+    }
+`
+
+const Title = styled.h2`
+    color: white;
+`
+
+
+
 const SelectedPlaylist = (props) => {
 
     const [songId, setSongId] = useState()
@@ -33,8 +64,11 @@ const addSong = () => {
 }
 
     return(<>
-        <p>{props.playlist.title}</p>
-        <div onClick={() => addSong()}>Add Song</div>
+        <PlaylistContainer>
+        <Title>{props.playlist.title}</Title>
+        <Add onClick={() => addSong()}>Add Song</Add>
+        </PlaylistContainer>
+        
     </>)
 }
 
