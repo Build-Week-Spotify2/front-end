@@ -11,6 +11,8 @@ const PlaylistContainer = styled.div`
     padding: 0px 10px;
     box-shadow: 2px 2px 5px 5px black;
     margin: 20px;
+    max-width: 500px;
+    margin: 0 auto;
 `
 const Add = styled.div`
     color: white;
@@ -31,8 +33,6 @@ const Add = styled.div`
 const Title = styled.h2`
     color: white;
 `
-
-
 
 const SelectedPlaylist = (props) => {
 

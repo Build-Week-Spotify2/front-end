@@ -11,8 +11,9 @@ import {useHistory, Link} from 'react-router-dom';
 
 const ResultsContainer = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    max-width: 800px;
 
     @media (max-width: 500px) {
         flex-direction: column;
@@ -126,9 +127,9 @@ const SearchResults = (props) => {
             </SearchInfo>
     
             <Functionality>
-                <AddSong onClick={ () => props.selectPlaylist()}>Save</AddSong>
-                <Link to='/select-playlist'><AddSong onClick={() => props.setSongToAdd(songInfo)}>Add*</AddSong></Link>
-                <AddSong onClick={ () => {suggestSongs()}}>Suggest</AddSong>
+                {/* <AddSong onClick={ () => props.selectPlaylist()}>Save</AddSong> */}
+                <Link to='/select-playlist'><AddSong onClick={() => props.setSongToAdd(songInfo)}>Add</AddSong></Link>
+                <AddSong onClick={ () => {suggestSongs()}}>Similar</AddSong>
             </Functionality>
         
         </ResultsContainer>

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import SuggestedSong from './SuggestedSong';
 
 const SuggestionsContainer = styled.div`
-    max-width: 500px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 10px;
     border-radius: 10px;

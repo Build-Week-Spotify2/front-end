@@ -7,8 +7,8 @@ import {connect} from 'react-redux';
 const SuggestedSongContainer = styled.div`
     color: white;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-evenly;
     margin-top: 10px;
 
 `
@@ -43,6 +43,10 @@ const FunctionButton = styled.div`
         font-weight: 900;
     }
 `
+const SongData = styled.div`
+    display: flex;
+    justify-content: left
+`
 
 
 const SuggestedSong = (props) => {
@@ -68,15 +72,18 @@ const SuggestedSong = (props) => {
     return(<>
     
     <SuggestedSongContainer>
-        <SongImage>
-        <img src={props.songData.album.images[0].url} alt='Album Artwork'/>
-        </SongImage>
+        <SongData>
+            <SongImage>
+            <img src={props.songData.album.images[0].url} alt='Album Artwork'/>
+            </SongImage>
 
-        <SongInfo>
-            <p>Artist: {props.songData.artists[0].name}</p>
-            <p>Album: {props.songData.album.name}</p>
-            <p>Song: {props.songData.name}</p>
-        </SongInfo>
+            <SongInfo>
+                <p>Artist: {props.songData.artists[0].name}</p>
+                <p>Album: {props.songData.album.name}</p>
+                <p>Song: {props.songData.name}</p>
+            </SongInfo>
+        </SongData>
+        
 
         <Functionality>
             <FunctionButton >Info</FunctionButton>

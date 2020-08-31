@@ -62,9 +62,6 @@ const FunctionButton = styled.div`
 
 const Playlist = (props) => {
 
-
-
-
     const [formState, setFormState] = useState({
         title: ''
         //this will need to be updated to pull in user's Id dynamically
