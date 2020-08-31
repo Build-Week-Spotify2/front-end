@@ -6,6 +6,10 @@ export const addPlaylist = playlistToAdd => {
     return {type: 'ADD_PLAYLIST', payload: playlistToAdd}
 }
 
+export const addNewPlaylist = newPlaylist => {
+    return {type: 'ADD_NEW_PLAYLIST', payload: newPlaylist}
+}
+
 export const selectPlaylist = list => {
     return {type: 'SELECT_PLAYLIST', payload: list}
 }

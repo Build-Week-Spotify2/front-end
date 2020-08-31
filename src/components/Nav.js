@@ -50,6 +50,7 @@ const NavBar = (props) => {
     function signOut() {
         localStorage.removeItem('auth-token')
         window.localStorage.removeItem('spotify-auth')
+        localStorage.removeItem('userName')
         window.location.href='/'
     }
 
@@ -62,7 +63,7 @@ const NavBar = (props) => {
 
             {localStorage.getItem('auth-token') ? (
             <NavUser>
-                <div className='username'>{props.userOnProps.user}</div>
+                <div className='username'>{localStorage.getItem('userName')}</div>
                 <div onClick={signOut} className='sign-out'>Sign Out</div>
             </NavUser>
             ) : (

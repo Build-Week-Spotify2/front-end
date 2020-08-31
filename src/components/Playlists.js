@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
-import {createPlaylist, addPlaylist} from '../actions/playlistActions';
+import {createPlaylist, addPlaylist, addNewPlaylist} from '../actions/playlistActions';
 import Playlist from './Playlist';
 import {Link} from 'react-router-dom';
 
@@ -35,7 +35,7 @@ const Playlists = (props) => {
 
     const [formState, setFormState] = useState({
         title: '',
-        user_id: 2
+        user_id: localStorage.getItem('user-id')
         //this will need to be updated to pull in user's Id dynamically
     })
 
@@ -45,7 +45,7 @@ const Playlists = (props) => {
 
     const fetchPlaylists = () => {
         axiosWithAuth()
-        .get('/playlists/2')
+        .get(`/playlists/${formState.user_id}`)
         .then((res) => {
             console.log('users playlists', res)
             props.addPlaylist(res.data)
@@ -76,6 +76,7 @@ const Playlists = (props) => {
             .post('/playlists/', formState)
             .then((res) => {
                 console.log('succesful playlist creation', res)
+                addNewPlaylist(res.data[0])
             })
             .then(fetchPlaylists())
             .catch((res) => {
@@ -135,5 +136,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    {createPlaylist, addPlaylist}
+    {createPlaylist, addPlaylist, addNewPlaylist}
 )(Playlists)

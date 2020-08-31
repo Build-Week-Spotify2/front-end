@@ -41,6 +41,7 @@ const loginUser = (e) => {
         console.log(res)
         localStorage.setItem('auth-token', res.data.token)
         localStorage.setItem('user-id', res.data.id)
+        localStorage.setItem('userName', formState.username)
         props.setUser(formState.username)
         props.history.push('/dashboard')
     })
