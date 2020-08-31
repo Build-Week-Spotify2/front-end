@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import axios from 'axios'
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {connect} from 'react-redux';
+import {setGraphData} from '../actions/graphActions';
 
 
 const SuggestedSongContainer = styled.div`
@@ -69,6 +71,19 @@ const SuggestedSong = (props) => {
         .catch((err) => console.log(err))
     }
 
+    const getVisual = () => {
+        axios 
+        .get(`https://ds-bw-spotify.herokuapp.com/features/${encodeURI(props.songData.name)}`)
+        .then((res) => {
+            console.log('visuals', res)
+            props.setGraphData(res.data.features)
+        })
+        .catch((res) => {
+            console.log('failed visuals', res)
+        })
+
+    }
+
     return(<>
     
     <SuggestedSongContainer>
@@ -86,7 +101,7 @@ const SuggestedSong = (props) => {
         
 
         <Functionality>
-            <FunctionButton >Info</FunctionButton>
+            <FunctionButton onClick={ () => {getVisual()}}>Info</FunctionButton>
             <FunctionButton onClick={() => {addFavorite()}}>Save</FunctionButton>
         </Functionality>
 
@@ -98,11 +113,12 @@ const SuggestedSong = (props) => {
 const mapStateToProps = state => {
     return {
         favesOnProps: state.favesReducer,
-        suggestionsOnProps: state.suggestionsReducer
+        suggestionsOnProps: state.suggestionsReducer,
+        visualsOnProps: state.graphReducer
     }
 }
 
 export default connect(
     mapStateToProps,
-    {}
+    {setGraphData}
 )(SuggestedSong)
