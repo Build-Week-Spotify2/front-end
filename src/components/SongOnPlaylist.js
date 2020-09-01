@@ -12,12 +12,24 @@ const SongContainer = styled.div`
     color: white;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin-top: 10px;
+`
+const SongData = styled.div`
+    display: flex;
+    justify-content: left;
+    align-items: center;
+`
+const Functionality = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: right:
+    align-items: middle;
 `
 const SongImage = styled.div`
     width: 100px;
     height: 100px;
+    margin-right: 10px;
 `
 const SongInfo = styled.div`
     color: white;
@@ -30,6 +42,7 @@ const RemoveSong = styled.div`
     padding: 5px 0px;
     border-radius: 20px;
     background-color: #1DB954;
+    margin: 5px;
 
     &:hover {
         background-color: red;
@@ -75,22 +88,27 @@ const SongOnPlaylist = (props) => {
     return(<>
 
         <SongContainer>
-            <SongImage>
-            <img src={props.songData.image_url} alt='Album Artwork'/>
-            </SongImage>
+            <SongData>
+                <SongImage>
+                <img src={props.songData.image_url} alt='Album Artwork'/>
+                </SongImage>
 
-            <SongInfo>
-                <p>Artist: {props.songData.artist}</p>
-                <p>Album: {props.songData.album}</p>
-                <p>Song: {props.songData.title}</p>
-            </SongInfo>
-
-            <RemoveSong onClick={ () => {  deleteSongFromList(); deleteSongFromDb(); props.deleteSongFromPlaylist(props.songData);}}>
-                X
-            </RemoveSong>
-            <RemoveSong onClick={ () => {getVisual()}}>
-                <Link to={`/playlist/${props.playlistId}/${props.songData.spotify_id}`}>?</Link>
-            </RemoveSong>
+                <SongInfo>
+                    <p>Artist: {props.songData.artist}</p>
+                    <p>Album: {props.songData.album}</p>
+                    <p>Song: {props.songData.title}</p>
+                </SongInfo>
+            </SongData>
+           
+            <Functionality>
+                <RemoveSong onClick={ () => {  deleteSongFromList(); deleteSongFromDb(); props.deleteSongFromPlaylist(props.songData);}}>
+                    X
+                </RemoveSong>
+                <RemoveSong onClick={ () => {getVisual()}}>
+                    <Link to={`/playlist/${props.playlistId}/${props.songData.spotify_id}`}>?</Link>
+                </RemoveSong>
+            </Functionality>
+           
         </SongContainer>
 
     </>)

@@ -26,6 +26,10 @@ img {
   margin: 0 auto;
 }
 
+p {
+  line-height: 1.1em;
+}
+
 @media screen and (max-width: 510px) {
   .username {
     display: none;
