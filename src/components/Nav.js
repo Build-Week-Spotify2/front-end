@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
-import {axiosWithAuth} from '../utils/axiosWithAuth';
+import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-
 import {connect} from 'react-redux';
 
 const NavContainer = styled.div`
@@ -57,7 +55,6 @@ const NavBar = (props) => {
     return(
         <NavContainer>
             <NavItem><Link to='/dashboard'>Home</Link></NavItem>
-            {/* <NavItem><Link to='/saved-songs'>Saved Songs</Link></NavItem> */}
             <NavItem><Link to='/playlists'>Playlists</Link></NavItem>
             <NavItem><a href='https://spotify-build-dh.netlify.app/'>About</a></NavItem>
 

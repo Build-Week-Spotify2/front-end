@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {useParams, useHistory, Link} from 'react-router-dom'
+import React from 'react';
+import {Link} from 'react-router-dom'
 import axios from 'axios';
 import {axiosWithAuth} from '../utils/axiosWithAuth'
 import styled from 'styled-components';
@@ -14,7 +14,6 @@ const SongContainer = styled.div`
     align-items: center;
     justify-content: space-evenly;
     margin-top: 10px;
-
 `
 const SongImage = styled.div`
     width: 100px;
@@ -42,10 +41,6 @@ const RemoveSong = styled.div`
 
 const SongOnPlaylist = (props) => {
 
-    let history = useHistory();
-    const params = useParams();
-
-
     const deleteSongFromList = () => {
         axiosWithAuth()
         .delete(`/playlist_songs/${props.songData.id}`)
@@ -55,11 +50,9 @@ const SongOnPlaylist = (props) => {
         
         .catch((res) => {
             console.log('failed deletion', res)
-        })
-       
-        
-
+        })   
     }
+
     const deleteSongFromDb = () => {
         axiosWithAuth()
         .delete(`/songs/${props.songData.id}`)
@@ -77,8 +70,8 @@ const SongOnPlaylist = (props) => {
         .catch((res) => {
             console.log('failed visuals', res)
         })
-
     }
+    
     return(<>
 
         <SongContainer>

@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {
+    useEffect} from 'react';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {connect} from 'react-redux';
 import {useHistory} from 'react-router-dom';

@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
-import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {setGraphData} from '../actions/graphActions';
-import {selectPlaylist, setSongToAdd} from '../actions/playlistActions';
+import {setSongToAdd} from '../actions/playlistActions';
 
 
 const SuggestedSongContainer = styled.div`
@@ -65,13 +64,6 @@ const SuggestedSong = (props) => {
             image_url: props.songData.album.images[0].url
         })
     }, [])
-
-    const addFavorite = () => {
-        axiosWithAuth()
-        .post('/songs', songInfo)
-        .then((res) => console.log('succesul post', res))
-        .catch((err) => console.log(err))
-    }
 
     const getVisual = () => {
         axios 

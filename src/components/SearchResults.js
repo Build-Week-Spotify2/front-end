@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {axiosWithAuth} from '../utils/axiosWithAuth';
 import {spotifyWithAuth} from '../utils/spotifyWithAuth';
 import {connect} from 'react-redux';
 import {setFaves} from '../actions/favesActions';
@@ -59,20 +58,20 @@ const AddSong = styled.div`
     }
 `
 
+
 const SearchResults = (props) => {
 
     const [suggestedSongs, setSuggestedSongs] = useState([])
 
-    useEffect(() => {
+    const pullSuggestions = () => {
         spotifyWithAuth()
         .get(`tracks/?ids=${props.suggestionsOnProps.suggestionIds.toString()}`)
         .then((res) => {
-            console.log('suggested song data', res)
+            // console.log('suggested song data', res)
             props.setSuggestedData(res.data.tracks)
             setSuggestedSongs(res.data.tracks)    
         })
-    }, [props.suggestionsOnProps.suggestionsMade])
-    
+    }
 
     const [songInfo, setSongInfo] = useState()
     useEffect(() => {
@@ -83,59 +82,39 @@ const SearchResults = (props) => {
             spotify_id: props.songData.id,
             image_url: props.songData.album.images[0].url
         })
-    }, [])
-
-    const addFavorite = () => {
-        axiosWithAuth()
-        .post('/songs', songInfo)
-        .then((res) => console.log('succesul post', res))
-        .then((res) => {
-            props.setFaves(songInfo)
-        })
-        .catch((err) => console.log(err))
-    }
-
+    }, [props.searchOnProps.hasSearched])
 
     let history = useHistory();
     const suggestSongs = () => {
         axios
             .post(`https://ds-bw-spotify.herokuapp.com/predict?item=${props.songData.id}`)
             .then((res) => {
-                console.log('song suggestions pulled', res)
+                // console.log('song suggestions pulled', res)
                 props.setSuggestions(res.data.recommendations)
                 history.push('/suggested-songs')
             })
             .catch((res) => console.log('failed song suggestions', res))
     }
 
-
-
-
     return(<>
             
             <ResultsContainer>
-
-            <SearchInfo >  
-                <SearchImage>
-                    <img src={props.songData.album.images[0].url} alt='Album Artwork'/>   
-                </SearchImage>
-                <SearchText>
-                    <p>Artist: {props.songData.artists[0].name}</p>
-                    <p>Album: {props.songData.album.name}</p>
-                    <p>Song: {props.songData.name}</p>
-                </SearchText>   
-            </SearchInfo>
-    
-            <Functionality>
-                {/* <AddSong onClick={ () => props.selectPlaylist()}>Save</AddSong> */}
-                <Link to='/select-playlist'><AddSong onClick={() => props.setSongToAdd(songInfo)}>Add</AddSong></Link>
-                <AddSong onClick={ () => {suggestSongs()}}>Similar</AddSong>
-            </Functionality>
+                <SearchInfo >  
+                    <SearchImage>
+                        <img src={props.songData.album.images[0].url} alt='Album Artwork'/>   
+                    </SearchImage>
+                    <SearchText>
+                        <p>Artist: {props.songData.artists[0].name}</p>
+                        <p>Album: {props.songData.album.name}</p>
+                        <p>Song: {props.songData.name}</p>
+                    </SearchText>   
+                </SearchInfo>
         
+                <Functionality>
+                    <Link to='/select-playlist'><AddSong onClick={() => props.setSongToAdd(songInfo)}>Add</AddSong></Link>
+                    <AddSong onClick={ () => {pullSuggestions(); suggestSongs()}}>Similar</AddSong>
+                </Functionality>
         </ResultsContainer>
-        
-
-
 </>)
 }
 
