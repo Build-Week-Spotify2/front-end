@@ -56,8 +56,10 @@ const registerUser = (e) => {
     axiosWithAuth()
     .post('/auth/register', formState)
     .then((res) => {
+        console.log('register info', res)
         localStorage.setItem('auth-token', res.data.token)
-        localStorage.setItem('user-id', res.data.id)
+        localStorage.setItem('user-id', res.data.user[0].id)
+        localStorage.setItem('userName', res.data.user[0].username)
         props.setUser(formState.username)
         props.history.push('/dashboard')
     })
