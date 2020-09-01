@@ -19,6 +19,7 @@ const SuggestedSongContainer = styled.div`
 const SongImage = styled.div`
     width: 100px;
     height: 100px;
+    margin-right: 10px;
 `
 
 const SongInfo = styled.div`
