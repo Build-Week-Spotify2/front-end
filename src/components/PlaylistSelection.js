@@ -38,7 +38,7 @@ const PlaylistSelection = (props) => {
   
       const fetchPlaylists = () => {
           axiosWithAuth()
-          .get('/playlists/2')
+          .get(`/playlists/${localStorage.getItem('user-id')}`)
           .then((res) => {
               console.log('users playlists', res)
               props.addPlaylist(res.data)
