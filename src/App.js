@@ -4,7 +4,6 @@ import './App.css';
 import Nav from './components/Nav';
 import SignIn from './components/SignIn';
 import Dashboard from './components/Dashboard';
-import SavedSongs from './components/SavedSongs';
 import { Route, Switch } from 'react-router-dom';
 import "./components/styles.css";
 import PrivateRoute from './components/PrivateRoute';
@@ -26,7 +25,6 @@ const App = (props) => {
         <ActivePlaylist userPlaylists={props.playlistOnProps.usersPlaylists} />
       </PrivateRoute>
       <PrivateRoute path='/playlist/:id/:song' component={Graph} />
-      <PrivateRoute path='/saved-songs' component={SavedSongs} />
       <PrivateRoute path='/suggested-songs' component={SuggestedSongs} />
       <PrivateRoute path='/select-playlist' component={PlaylistSelection} />
     </Switch>
