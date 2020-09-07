@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {purgePlaylistData} from '../actions/activePlaylistActions';
+import {purgeUserPlaylists} from '../actions/playlistActions';
 
 const NavContainer = styled.div`
     margin: 0 auto;
@@ -54,8 +56,8 @@ const NavBar = (props) => {
 
     return(
         <NavContainer>
-            <NavItem><Link to='/dashboard'>Home</Link></NavItem>
-            <NavItem><Link to='/playlists'>Playlists</Link></NavItem>
+            <NavItem><Link onClick={() => {props.purgePlaylistData(); props.purgeUserPlaylists();}} to='/dashboard'>Home</Link></NavItem>
+            <NavItem><Link onClick={() => { props.purgeUserPlaylists();}} to='/playlists'>Playlists</Link></NavItem>
             <NavItem><a href='https://spotify-build-dh.netlify.app/'>About</a></NavItem>
 
             {localStorage.getItem('auth-token') ? (
@@ -72,11 +74,13 @@ const NavBar = (props) => {
 
 const mapStateToProps = state => {
     return {
-        userOnProps: state.signInReducer
+        userOnProps: state.signInReducer,
+        playlistOnProps: state.activePlaylistReducer,
+        userPlaylistsOnProps: state.activePlaylistReducer
     }
 }
 
 export default connect(
     mapStateToProps,
-    {}
+    {purgePlaylistData, purgeUserPlaylists}
 )(NavBar)

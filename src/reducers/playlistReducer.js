@@ -63,8 +63,14 @@ export const playlistReducer = (state = initialState, action) => {
                     ...state.usersPlaylists.filter(list => list !== action.payload)
                 ]
             };
+        
+        case 'PURGE_USER_PLAYLIST':
+            return {
+                usersPlaylists: [{}]
+            }
 
             default:
                 return state;
     }
+
 }

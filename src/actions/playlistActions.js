@@ -33,3 +33,7 @@ export const playlistUpdated = list => {
 export const deletePlaylist = list => {
     return {type: 'DELETE_PLAYLIST', payload: list}
 }
+
+export const purgeUserPlaylists = list => {
+    return {type: 'PURGE_USER_PLAYLIST', payload: list}
+}

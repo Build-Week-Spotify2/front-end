@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import {axiosWithAuth} from '../utils/axiosWithAuth'
+import {corsAxiosWithAuth} from '../utils/corsAxiosWithAuth';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {removeFaves} from '../actions/favesActions';
@@ -67,7 +68,7 @@ const SongOnPlaylist = (props) => {
     }
 
     const deleteSongFromDb = () => {
-        axiosWithAuth()
+        corsAxiosWithAuth()
         .delete(`/songs/${props.songData.id}`)
         .then((res) => {console.log('succesfully deleted from DB', res)})
         .catch((res) => {console.log('failed to delete from DB', res)})

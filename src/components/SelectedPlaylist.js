@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {axiosWithAuth} from '../utils/axiosWithAuth';
 import styled from 'styled-components';
+import {useHistory} from 'react-router-dom';
 
 const PlaylistContainer = styled.div`
     border-radius: 5px;
@@ -12,7 +13,6 @@ const PlaylistContainer = styled.div`
     box-shadow: 2px 2px 5px 5px black;
     margin: 20px;
     max-width: 500px;
-    margin: 0 auto;
 `
 const Add = styled.div`
     color: white;
@@ -35,6 +35,7 @@ const Title = styled.h2`
 `
 
 const SelectedPlaylist = (props) => {
+    let history = useHistory();
 
     const [songId, setSongId] = useState()
 
@@ -66,7 +67,7 @@ const addSong = () => {
     return(<>
         <PlaylistContainer>
         <Title>{props.playlist.title}</Title>
-        <Add onClick={() => addSong()}>Add Song</Add>
+        <Add onClick={() => {addSong(); history.goBack()}}>Add Song</Add>
         </PlaylistContainer>
         
     </>)
